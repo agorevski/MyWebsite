@@ -16,6 +16,11 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         
+        <!-- Preload critical fonts -->
+        <link rel="preload" as="font" type="font/woff2" href="~/Content/fonts/fontawesome-webfont.woff2" crossorigin>
+        <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/raleway/v34/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvao4CPNLA3.woff2" crossorigin>
+        <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/muli/v37/7Aulp_0qi-FZqHnHz5hf8xv-IF7lIg.woff2" crossorigin>
+        
         <!-- Critical CSS - loaded synchronously -->
         <link href="~/Content/stylesheets/vendors/bootstrap.min.css" rel="stylesheet">
         <link href="~/Content/stylesheets/vendors/materialize.css" rel="stylesheet">
@@ -60,16 +65,19 @@
     </footer>
 
     <!-- SCRIPTS -->
+    <!-- Critical JS - loaded synchronously -->
     <script src="~/Content/javascript/vendors/jquery-2.1.3.min.js"></script>
     <script src="~/Content/javascript/vendors/bootstrap.min.js"></script>
     <script src="~/Content/javascript/vendors/materialize.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaNPZfQMdAHwTbVoqBAYshvj4-pI2pRjU"></script>
-    <script src="~/Content/javascript/vendors/markerwithlabel.min.js"></script>
-    <script src="~/Content/javascript/vendors/retina.min.js"></script>
-    <script src="~/Content/javascript/vendors/scrollreveal.min.js"></script>
-    <script src="~/Content/javascript/vendors/swiper.jquery.min.js"></script>
-    <script src="~/Content/javascript/vendors/jquery.magnific-popup.min.js"></script>
-    <script src="~/Content/javascript/custom.js"></script>
-    <script src="~/Content/toggle/js.js"></script>
+    
+    <!-- Non-critical JS - deferred for better performance -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaNPZfQMdAHwTbVoqBAYshvj4-pI2pRjU" defer></script>
+    <script src="~/Content/javascript/vendors/markerwithlabel.min.js" defer></script>
+    <script src="~/Content/javascript/vendors/retina.min.js" defer></script>
+    <script src="~/Content/javascript/vendors/scrollreveal.min.js" defer></script>
+    <script src="~/Content/javascript/vendors/swiper.jquery.min.js" defer></script>
+    <script src="~/Content/javascript/vendors/jquery.magnific-popup.min.js" defer></script>
+    <script src="~/Content/javascript/custom.js" defer></script>
+    <script src="~/Content/toggle/js.js" defer></script>
 </body>
 </html>
