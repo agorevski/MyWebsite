@@ -7,6 +7,12 @@ using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Enable static web assets for all environments
+if (builder.Environment.IsProduction())
+{
+    builder.WebHost.UseStaticWebAssets();
+}
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -51,7 +57,12 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+
+// Conditional HTTPS redirection with port detection
+if (app.Configuration.GetValue<string>("Kestrel:Endpoints:Https:Url") != null)
+{
+    app.UseHttpsRedirection();
+}
 
 // Enable response compression
 app.UseResponseCompression();
