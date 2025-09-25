@@ -1,0 +1,442 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Personal Website & Resume";
+}
+
+<!--==========================================
+                  PRE-LOADER
+===========================================-->
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="box-holder animated bounceInDown">
+                <span class="load-box"><span class="box-inner"></span></span>
+            </div>
+            <div class="text-holder text-center">
+                <h2>ALEX GOREVSKI</h2>
+                <h6>Senior Software Developer</h6>
+            </div>
+        </div>
+    </div>
+</div>
+<!--==========================================
+                    HEADER
+===========================================-->
+<header id="home">
+    <nav id="theMenu" class="menu">
+        <div id="menu-options" class="menu-wrap">
+            <div class="logo-flat">
+                <img alt="personal-logo" class="img-responsive" src="~/images/profile/alex.webp">
+            </div>
+            <br>
+            <a href="#home"><i class="title-icon fa fa-user"></i>Home</a>
+            <a href="#about"><i class="title-icon fa fa-dashboard"></i>About</a>
+            <a href="#education"><i class="title-icon fa fa-graduation-cap"></i>Education</a>
+            <a href="#experience"><i class="title-icon fa fa-suitcase"></i>Experience</a>
+            <a href="#interest"><i class="title-icon fa fa-heart"></i>Interests</a>
+            <a href="#testimonials"><i class="title-icon fa fa-users"></i>Clients</a>
+            <a href="#contact"><i class="title-icon fa fa-envelope"></i>Contact</a>
+        </div>
+        <div id="menuToggle">
+            <div class="toggle-normal">
+                <i class="material-icons top-bar">remove</i>
+                <i class="material-icons middle-bar">remove</i>
+                <i class="material-icons bottom-bar">remove</i>
+            </div>
+        </div>
+    </nav>
+    <div class="header-background section"></div>
+</header>
+
+<!--==========================================
+                   V-CARD
+===========================================-->
+<div id="v-card-holder" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div id="v-card" class="card">
+                    <div id="profile" class="right">
+                        <img alt="profile-image" class="img-responsive" src="~/images/profile/profile.webp">
+                        <div class="slant"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="info-headings">
+                            <h4 class="text-uppercase left">ALEX GOREVSKI</h4>
+                            <h6 class="text-capitalize left">Senior Software Developer</h6>
+                        </div>
+                        <div class="infos">
+                            <ul class="profile-list">
+                                <li class="clearfix">
+                                    <span class="title"><i class="material-icons">email</i></span>
+                                    <span class="content">alex.gorevski@live.com</span>
+                                </li>
+                                <li class="clearfix">
+                                    <span class="title"><i class="material-icons">language</i></span>
+                                    <span class="content">www.alexgorevski.com</span>
+                                </li>
+                                <li class="clearfix">
+                                    <span class="title"><i class="fa fa-skype" aria-hidden="true"></i></span>
+                                    <span class="content">alex.gorevski@skype.com</span>
+                                </li>
+                                <li class="clearfix">
+                                    <span class="title"><i class="material-icons">phone</i></span>
+                                    <span class="content">+1 585 978 0110</span>
+                                </li>
+                                <li class="clearfix">
+                                    <span class="title"><i class="material-icons">place</i></span>
+                                    <span class="content">26th Ave S, Seattle WA</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="links">
+                            <a href="https://www.facebook.com/ofepicproportions/" id="first_one" class="social btn-floating indigo"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.linkedin.com/in/alexgorevski/" class="social btn-floating blue darken-3"><i class="fa fa-linkedin"></i></a>
+                            <a href="https://github.com/agorevski/" class="social  btn-floating purple darken-3"><i class="fa fa-github-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--==========================================
+                   ABOUT
+===========================================-->
+<div id="about" class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="about-card" class="card">
+                    <div class="card-content">
+                        <p>
+                            As an experienced engineer with a 10-year track record of shipping high-quality code, I believe that
+                            the best opportunities are created, not assigned. I drive engineering excellence with strong value-proposition.
+                            I specialize in big-data and scalable systems.
+                        </p>
+                    </div>
+                    <div id="about-btn" class="card-action">
+                        <div class="about-btn">
+                            <a href="#contact" class="btn waves-effect">Contact Me</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--==========================================
+                   EDUCATION
+===========================================-->
+<section id="education" class="section">
+    <div class="container">
+        <!-- SECTION TITLE -->
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><img src="~/images/icons/book.webp" alt="book" loading="lazy">Education</h4>
+        </div>
+        <div id="timeline-education">
+            <!-- TIMELINE -->
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-graduation-cap"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title">Rochester Institute of Technology</h6>
+                        <div class="timeline-info">
+                            <h6><small>Computer Engineering</small></h6>
+                            <h6><small>2003 - 2008</small></h6>
+                        </div>
+                        <p>
+                            I completed the 5-year Computer Engineering program a quarter early, with a 3.6 GPA.
+                            RIT was ranked #1 in the country for the CE undergrad program when I was accepted.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- TIMELINE -->
+            <div class="timeline-block">
+                <div class="timeline-dot"><h6>H</h6></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title">Gates Chili High School</h6>
+                        <div class="timeline-info">
+                            <h6><small>1999 - 2003</small></h6>
+                        </div>
+                        <p>
+                            Attended Gates Chili High School completed the 5-year Computer Engineering program a quarter early, with a 3.6 GPA.
+                            RIT was ranked #1 in the country for CE undergrad program when I was accepted into the program.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+                   EXPERIENCE
+===========================================-->
+<section id="experience" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><img src="~/images/icons/layers.webp" alt="stack" loading="lazy">Experience</h4>
+        </div>
+        <div id="timeline-experience">
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-database"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><i class="fa fa-windows"></i>&nbsp;Analog. Data Insights</h6>
+                        <div class="timeline-info"><small>2017 - Present (HoloLens - Senior SDE)</small></div>
+                        <p>Created tooling to gather insights over Petabyte-scale data through a C# domain-specific-language.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-globe"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><img src="~/images/timeline/ch3.webp" loading="lazy" /></h6>
+                        <div class="timeline-info"><small>Jan 2017 - Present</small></div>
+                        <p>
+                            I monitor and notify college students when courses they're interested in have openings.
+                        </p>
+                        <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-classhawk"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-cogs"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><i class="fa fa-windows"></i>&nbsp;Analog. Analysis Platform</h6>
+                        <div class="timeline-info"><small>2013 - 2015 (HoloLens - Senior SDE)</small></div>
+                        <p>Optimized a mature platform for reliability, scalability, and runtime performance using Azure's tech stack.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-bolt"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><i class="fa fa-windows"></i>&nbsp;Analog. Insights and Efficiency</h6>
+                        <div class="timeline-info"><small>2015 - 2017 (HoloLens - Senior SDE)</small></div>
+                        <p>Developed features for the organization's first HPC cluster for Ground Truth Analysis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-calendar"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><i class="fa fa-windows"></i>&nbsp;Windows Inbox Applications</h6>
+                        <div class="timeline-info"><small>2012 - 2013 (Calendar - SDET II)</small></div>
+                        <p>Developed test infrastructure for 3rd party developer APIs used by the Windows 8 Calendar app.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-cloud"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title"><i class="fa fa-windows"></i>&nbsp;Windows Live Communications</h6>
+                        <div class="timeline-info"><small>2008 - 2012 (Platform - SDET II)</small></div>
+                        <p>Owned the test infrastructure for the entire sync stack across all Windows Live Client Applications.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-home"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title">Savant Systems</h6>
+                        <div class="timeline-info"><small>2007 (Hardware Engineering Intern)</small></div>
+                        <p>Designed PCBs and programmed firmware for a suite of home automation products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-dot"><i class="fa fa-money"></i></div>
+                <div class="card timeline-content">
+                    <div class="card-content">
+                        <h6 class="timeline-title">Paychex</h6>
+                        <div class="timeline-info"><small>2006 (Quality Assurance Intern)</small></div>
+                        <p>Tested releases of internal payroll software, replacing the aging COBOL solution.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+                  MODALS
+===========================================-->
+<section>
+    <div class="modal fade" id="myModal-classhawk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header  text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-responsive" alt="graduation" src="~/images/timeline/classhawk.webp" loading="lazy">
+                    <p>
+                        We've all been there.  You've registered for all the classes you need next semester, but your
+                        schedule is less than perfect.  That one class on Friday separates you from 3-day weekends this
+                        semester.  Or maybe you just want to sleep in and take the 11:30am Biology Lab instead of the
+                        9am.  If you've ever sat there, refreshing the registration page for hours on end, hoping someone
+                        drops the class you want, you're aware of how frustrating it can be.  Well, stop refreshing the
+                        page!  We'll monitor for openings for you, and text you when someone drops out.  It's that simple!
+                        So stop worrying, and get started today!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+                   INTERESTS
+===========================================-->
+<section id="interest" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><img src="~/images/icons/heart.webp" alt="heart" loading="lazy">Interests</h4>
+        </div>
+        <div id="interest-card" class="card">
+            <div class="row no-gutters">
+                <div class="col-md-2 col-sm-4 col-xs-6  box text-center">
+                    <div class="interest-icon">
+                        <i class="fa fa-coffee"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-podcast"></i>
+                        <span>Coffee & Podcasts</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
+                    <div class="interest-icon-even">
+                        <i class="fa fa-twitch"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-gamepad"></i>
+                        <span>Online Gaming</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
+                    <div class="interest-icon">
+                        <i class="fa fa-life-ring"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-ship"></i>
+                        <span>Crabbing & Boating</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
+                    <div class="interest-icon-even">
+                        <i class="fa fa-futbol-o"></i>
+                        <span>Tennis & Soccer</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
+                    <div class="interest-icon">
+                        <i class="fa fa-tree"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-leaf"></i>
+                        <span>Hiking</span>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
+                    <div class="interest-icon-even">
+                        <i class="fa fa-video-camera"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-film"></i>
+                        <span>Movies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+             TESTIMONIALS AND CLIENTS
+===========================================-->
+<section id="testimonials" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><img src="~/images/icons/handshake.webp" alt="handshake" loading="lazy">Clients</h4>
+        </div>
+        <div id="clients">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="clients-wrap">
+                            <ul id="clients-list" class="clearfix">
+                                <li><img src="~/images/logos/logo1.webp" alt="Class Hawk" loading="lazy"></li>
+                                <li></li>
+                                <li><img src="~/images/logos/logo2.webp" alt="Microsoft Corporation" loading="lazy"></li>
+                                <li></li>
+                                <li><img src="~/images/logos/logo3.webp" alt="Paychex Corporation" loading="lazy"></li>
+                                <li></li>
+                                <li><img src="~/images/logos/logo4.webp" alt="Savant Systems" loading="lazy"></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+                  CONTACT
+===========================================-->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h4 class="text-uppercase text-center"><img src="~/images/icons/envelope.webp" alt="envelope" loading="lazy">Contact</h4>
+        </div>
+        <div class="row">
+            <div id="contact-card" class="col-md-5 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-content">
+                        <form id="contact-form" name="c-form">
+                            <div class="input-field">
+                                <input id="first_name" type="text" class="validate" name="first_name" required>
+                                <label for="first_name">Name</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="sub" type="text" class="validate" name="sub">
+                                <label for="sub">Subject</label>
+                            </div>
+                            <div class="input-field">
+                                <input id="email" type="email" class="validate" name="email" required>
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field">
+                                <textarea id="textarea1" class="materialize-textarea" name="message" required></textarea>
+                                <label for="textarea1">Message</label>
+                            </div>
+                            <div class="contact-send">
+                                <button id="submit" name="contactSubmit" type="submit" value="Submit" disabled="true" class="btn waves-effect">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="form-loader" class="progress is-hidden"><div class="indeterminate"></div></div>
+                </div>
+            </div>
+
+            <div class="col-md-7 col-sm-12 col-xs-12">
+                <div id="map-card" class="card">
+                    <div id="myMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--==========================================
+                     SCROLL TO TOP
+===========================================-->
+<div id="scroll-top">
+    <div id="scrollup"><i class="fa fa-angle-up"></i></div>
+</div>
