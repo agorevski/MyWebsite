@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using AlexGorevskiCom.Core.Data;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.StaticAssets;
 using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
