@@ -262,4 +262,4 @@ The Driftly MVP is feature-complete for core functionality. The app demonstrates
 
 **Developed by:** Alex Gorevski
 **Framework:** .NET MAUI 9.0
-**Date Completed:** January 2025
+**Date Completed:** October 2025
