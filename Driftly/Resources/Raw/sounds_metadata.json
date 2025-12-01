@@ -1,0 +1,110 @@
+[
+  {
+    "id": "rain_soft",
+    "name": "Soft Rain",
+    "category": "Rain",
+    "fileName": "rain_soft.ogg",
+    "premium": false,
+    "iconName": "cloud_rain",
+    "description": "Gentle rain sounds for relaxation"
+  },
+  {
+    "id": "rain_heavy",
+    "name": "Heavy Rain",
+    "category": "Rain",
+    "fileName": "rain_heavy.ogg",
+    "premium": false,
+    "iconName": "cloud_rain",
+    "description": "Intense rainfall for deep focus"
+  },
+  {
+    "id": "ocean_waves",
+    "name": "Ocean Waves",
+    "category": "Water",
+    "fileName": "ocean_waves.ogg",
+    "premium": false,
+    "iconName": "water",
+    "description": "Calming ocean waves"
+  },
+  {
+    "id": "river_stream",
+    "name": "River Stream",
+    "category": "Water",
+    "fileName": "river_stream.ogg",
+    "premium": true,
+    "iconName": "water",
+    "description": "Peaceful flowing stream"
+  },
+  {
+    "id": "wind_gentle",
+    "name": "Gentle Wind",
+    "category": "Nature",
+    "fileName": "wind_gentle.ogg",
+    "premium": false,
+    "iconName": "wind",
+    "description": "Soft wind through trees"
+  },
+  {
+    "id": "forest_birds",
+    "name": "Forest Birds",
+    "category": "Nature",
+    "fileName": "forest_birds.ogg",
+    "premium": true,
+    "iconName": "tree",
+    "description": "Birds chirping in the forest"
+  },
+  {
+    "id": "fireplace",
+    "name": "Fireplace",
+    "category": "Indoor",
+    "fileName": "fireplace.ogg",
+    "premium": true,
+    "iconName": "fire",
+    "description": "Cozy fireplace crackling"
+  },
+  {
+    "id": "white_noise",
+    "name": "White Noise",
+    "category": "Noise",
+    "fileName": "white_noise.ogg",
+    "premium": false,
+    "iconName": "volume_up",
+    "description": "Pure white noise for blocking distractions"
+  },
+  {
+    "id": "pink_noise",
+    "name": "Pink Noise",
+    "category": "Noise",
+    "fileName": "pink_noise.ogg",
+    "premium": false,
+    "iconName": "volume_up",
+    "description": "Balanced pink noise for sleep"
+  },
+  {
+    "id": "brown_noise",
+    "name": "Brown Noise",
+    "category": "Noise",
+    "fileName": "brown_noise.ogg",
+    "premium": true,
+    "iconName": "volume_up",
+    "description": "Deep brown noise for concentration"
+  },
+  {
+    "id": "thunder",
+    "name": "Thunder Storm",
+    "category": "Rain",
+    "fileName": "thunder.ogg",
+    "premium": true,
+    "iconName": "flash_on",
+    "description": "Dramatic thunderstorm"
+  },
+  {
+    "id": "cafe",
+    "name": "Coffee Shop",
+    "category": "Indoor",
+    "fileName": "cafe.ogg",
+    "premium": true,
+    "iconName": "local_cafe",
+    "description": "Ambient coffee shop sounds"
+  }
+]
