@@ -468,7 +468,8 @@
     <footer>
         <div class="container">
             <p class="text-center">
-                © Alex Gorevski 2017
+                © Alex Gorevski <span id="current-year"></span>
+                <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
             </p>
         </div>
     </footer>
