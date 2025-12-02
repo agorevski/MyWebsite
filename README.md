@@ -20,27 +20,9 @@ This is a personal portfolio website built with pure HTML, CSS, and JavaScript. 
 
 This site is deployed to Azure Static Web Apps via GitHub Actions.
 
-### Azure Static Web Apps Setup
-
-1. Create a new Static Web App in Azure Portal
-2. Connect it to this GitHub repository
-3. Azure will automatically provide a deployment token
-4. Add the token as `AZURE_STATIC_WEB_APPS_API_TOKEN` secret in GitHub repository settings
-5. Push to master branch to trigger automatic deployment
-
-### Alternative Deployment Options
-
-This static site can be deployed to any web hosting service:
-
-- **Azure Static Web Apps** (recommended, free tier available)
-- **GitHub Pages**
-- **Netlify**
-- **Vercel**
-- Any traditional web hosting with static file support
-
 ## 📁 Project Structure
 
-```
+```text
 .
 ├── index.html              # Main HTML file
 ├── favicon.ico             # Site favicon
@@ -64,12 +46,14 @@ This static site can be deployed to any web hosting service:
 To run locally:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/agorevski/MyWebsite.git
    cd MyWebsite
    ```
 
 2. Open `index.html` in your browser, or use a local web server:
+
    ```bash
    # Using Python 3
    python -m http.server 8000
@@ -92,18 +76,6 @@ To run locally:
 - Google Maps API
 - Swiper.js
 
-## 📧 Contact
-
-- Email: alex.gorevski@live.com
-- LinkedIn: [alexgorevski](https://www.linkedin.com/in/alexgorevski/)
-- GitHub: [agorevski](https://github.com/agorevski/)
-
 ## 📄 License
 
 © Alex Gorevski 2017-2025. All rights reserved.
-
----
-
-## Migration Notes
-
-This site was migrated from ASP.NET Web Pages (.NET Framework 4.6.1) to a pure static HTML/CSS/JS site in December 2025. The migration removed server-side dependencies while preserving all visual and functional elements.
