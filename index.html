@@ -17,6 +17,11 @@
         <!-- Optimized Google Fonts - combined into single request with font-display swap -->
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" rel="stylesheet">
         
+        <!-- Preload critical LCP image -->
+        <link rel="preload" as="image" href="Content/images/backgrounds/background-large.webp" type="image/webp" media="(min-width: 1281px)">
+        <link rel="preload" as="image" href="Content/images/backgrounds/background-medium.webp" type="image/webp" media="(min-width: 769px) and (max-width: 1280px)">
+        <link rel="preload" as="image" href="Content/images/backgrounds/background-small.webp" type="image/webp" media="(max-width: 768px)">
+        
         <!-- CSS files - combined into single file for faster loading -->
         <link href="Content/stylesheets/combined.min.css" rel="stylesheet">
     </head>
@@ -69,7 +74,14 @@
             </div>
         </div>
     </nav>
-    <div class="header-background section"></div>
+    <div class="header-background section">
+        <picture>
+            <source media="(min-width: 1281px)" srcset="Content/images/backgrounds/background-large.webp" type="image/webp">
+            <source media="(min-width: 769px)" srcset="Content/images/backgrounds/background-medium.webp" type="image/webp">
+            <source media="(max-width: 768px)" srcset="Content/images/backgrounds/background-small.webp" type="image/webp">
+            <img src="Content/images/backgrounds/background-medium.jpg" alt="Header background" fetchpriority="high" loading="eager" width="1920" height="370" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+        </picture>
+    </div>
 </header>
 
 <main>
