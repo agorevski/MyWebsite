@@ -16,17 +16,75 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         
-        <!-- Optimized Google Fonts - combined into single request with font-display swap -->
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" rel="stylesheet">
-        
         <!-- Preload critical LCP image -->
         <link rel="preload" as="image" href="Content/images/backgrounds/background-large.webp" type="image/webp" media="(min-width: 1281px)">
         <link rel="preload" as="image" href="Content/images/backgrounds/background-medium.webp" type="image/webp" media="(min-width: 769px) and (max-width: 1280px)">
         <link rel="preload" as="image" href="Content/images/backgrounds/background-small.webp" type="image/webp" media="(max-width: 768px)">
         
-        <!-- CSS files - combined and purged for faster loading (56% reduction) -->
-        <link href="Content/stylesheets/combined-purged.min.css" rel="stylesheet">
-        <link href="Content/stylesheets/header-lcp-fix.css" rel="stylesheet">
+        <!-- Inline Critical CSS for above-the-fold content -->
+        <style>
+            /* Critical LCP Fix */
+            #home .header-background{background:0 0!important;background-image:none!important;overflow:hidden}
+            #home .header-background picture{display:block;width:100%;height:100%}
+            #home .header-background img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center}
+            
+            /* Critical Base Styles */
+            *,:after,:before{box-sizing:inherit}
+            html{box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;line-height:1.5;font-family:Roboto,sans-serif;color:rgba(0,0,0,.87);font-weight:400;font-size:14px}
+            body{margin:0;padding:0;font-family:Roboto,sans-serif;font-size:15px;background-color:#f5f5f5;color:#616161;-webkit-font-smoothing:subpixel-antialiased}
+            
+            /* Critical Layout */
+            .container{margin:0 auto;max-width:1280px;width:90%;padding-right:15px;padding-left:15px}
+            @media only screen and (min-width:601px){.container{width:85%}}
+            @media only screen and (min-width:993px){.container{width:70%}}
+            .section{position:relative;padding-top:1rem;padding-bottom:1rem}
+            
+            /* Critical Header/Menu Styles */
+            #home .menu{position:fixed;left:-225px;width:225px;height:100%;top:0;z-index:10;text-align:left;background:#06a763;transition:all .3s ease}
+            #home .menu .menu-wrap{position:absolute;top:0;left:0;background:#f5f5f5;width:225px;height:100%;overflow-y:auto;padding-top:14px}
+            #home .menu .logo-flat{height:200px;margin-top:-14px;background:#06a763}
+            #home .menu .logo-flat img{width:100%;padding:30px 44px 44px 44px}
+            #home .menu a{margin-left:30px;margin-right:30px;color:#616161;display:block;font-size:12px;font-weight:700;line-height:40px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+            #home #menuToggle{position:absolute;top:20px;right:-65px;z-index:11;display:block;text-align:center;font-size:14px;width:40px;height:40px;line-height:40px;cursor:pointer;border:1px solid rgba(93,92,92,.52);background:rgba(0,0,0,.06);transition:all .5s ease-in-out}
+            #home #menuToggle .toggle-normal{font-size:31px}
+            #home #menuToggle .toggle-normal i{font-size:31px;padding:4px;color:#1976d2}
+            #home #menuToggle .toggle-normal .top-bar{position:absolute;right:0;top:-6px;transition:.8s}
+            #home #menuToggle .toggle-normal .middle-bar{position:absolute;right:0;top:0;opacity:1;transition:.8s}
+            #home #menuToggle .toggle-normal .bottom-bar{position:absolute;right:0;top:6px;transform:rotate(0);transition:.8s}
+            
+            /* Critical Header Background */
+            #home .header-background{position:relative;display:block;width:100%;height:370px;background:url(Content/images/backgrounds/background-small.webp) no-repeat;background-size:cover;background-position:center center;background-attachment:fixed}
+            @media (min-width:769px){#home .header-background{background-image:url(Content/images/backgrounds/background-medium.webp)}}
+            @media (min-width:1281px){#home .header-background{background-image:url(Content/images/backgrounds/background-large.webp)}}
+            
+            /* Critical V-Card Styles */
+            #v-card-holder{overflow:visible;width:100%;height:auto;margin-top:-194px}
+            #v-card-holder #v-card{position:relative;width:100%;height:400px;overflow:hidden;z-index:1;background:#06a763;margin:-33px 3px 0 0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:2px}
+            #v-card-holder #v-card #profile{position:absolute;right:0;z-index:1}
+            #v-card-holder #v-card #profile img{width:400px;height:auto}
+            #v-card-holder #v-card #profile .slant{top:0;z-index:1;position:absolute;border-style:solid;border-width:400px 0 0 100px;border-color:rgba(223,50,50,0) transparent transparent #06a763}
+            #v-card-holder #v-card .info-headings{max-width:514px}
+            #v-card-holder #v-card .info-headings h4{display:block;width:100%;font-weight:900;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.29);font-size:2.28rem;line-height:110%;margin:1.14rem 0 .912rem}
+            #v-card-holder #v-card .info-headings h6{display:block;width:100%;font-weight:300;margin-top:-10px;margin-bottom:30px;font-size:1.2em;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.29)}
+            #v-card-holder #v-card .infos{max-width:515px;margin-top:99px}
+            #v-card-holder #v-card .card-content{padding:20px;border-radius:0 0 2px 2px}
+            
+            /* Material Icons for menu */
+            .material-icons{text-rendering:optimizeLegibility;font-feature-settings:'liga';line-height:inherit}
+            
+            /* Image responsive */
+            img{border:0;vertical-align:middle}
+            .img-responsive{display:block;max-width:100%;height:auto}
+            picture{display:contents}
+        </style>
+        
+        <!-- Preload and async load Google Fonts -->
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" rel="stylesheet"></noscript>
+        
+        <!-- Async load non-critical CSS -->
+        <link rel="preload" href="Content/stylesheets/combined-purged.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="Content/stylesheets/combined-purged.min.css" rel="stylesheet"></noscript>
     </head>
 <body>
 <!--==========================================
