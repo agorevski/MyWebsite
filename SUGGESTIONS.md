@@ -15,31 +15,6 @@ Based on a review of the codebase, here are recommendations to improve the websi
 
 ---
 
-## ♿ Accessibility
-
-### 6. Add Skip Navigation Link
-- Add a "Skip to main content" link at the top of the page for keyboard users
-- Example: `<a href="#about" class="sr-only sr-only-focusable">Skip to main content</a>`
-
-### 7. Improve Form Labels and Validation
-- Add `aria-describedby` for form error messages
-- Include visible error messages, not just disabled submit button
-- The submit button is permanently disabled (`disabled="true"`); consider enabling it after validation
-
-### 8. Add ARIA Landmarks
-- Add `role="navigation"` to the nav element or use `<nav aria-label="Main navigation">`
-- The modal dialogs need proper focus management
-
-### 9. Improve Color Contrast
-- Verify text contrast ratios meet WCAG 2.1 AA standards (4.5:1 for normal text)
-- The green (#06a763) on white may not meet contrast requirements for small text
-
-### 10. Add Alt Text Descriptions
-- Some alt texts are generic (e.g., "profile-image", "book", "stack")
-- Provide more descriptive alt text or use empty alt="" for purely decorative images
-
----
-
 ## 📱 User Experience
 
 ### 15. Update Resume Link
@@ -68,26 +43,12 @@ Based on a review of the codebase, here are recommendations to improve the websi
 
 ---
 
-## 🔒 Security
-
-### 22. Add Security Headers
-- Add Content Security Policy (CSP), X-Frame-Options, etc.
-- Can be configured in Azure Static Web Apps `staticwebapp.config.json`
-
-### 23. Add Subresource Integrity (SRI)
-- Add SRI hashes to external scripts
-- Example: `<script src="..." integrity="sha384-..." crossorigin="anonymous">`
-
----
-
 ## 📊 Quick Wins (High Impact, Low Effort)
 
-| Priority | Suggestion | Impact | Effort | Status |
-|----------|-----------|--------|--------|--------|
-| ~~1~~ | ~~Update resume PDF~~ | ~~High~~ | ~~Low~~ | Pending |
-| ~~2~~ | ~~Add Open Graph meta tags~~ | ~~Medium~~ | ~~Low~~ | Pending |
-| ~~3~~ | ~~Add skip navigation link~~ | ~~Medium~~ | ~~Low~~ | Pending |
-| ~~6~~ | ~~Add dark mode CSS~~ | ~~Medium~~ | ~~Medium~~ | Pending |
+| Priority | Suggestion | Impact | Effort |
+|----------|-----------|--------|--------|
+| 1 | Update resume PDF | High | Low |
+| 2 | Add dark mode CSS | Medium | Medium |
 
 ---
 

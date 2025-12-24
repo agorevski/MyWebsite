@@ -38,6 +38,9 @@
         <!-- CSS Custom Properties (Variables) -->
         <link rel="stylesheet" href="Content/stylesheets/variables.css">
         
+        <!-- Accessibility Styles -->
+        <link rel="stylesheet" href="Content/stylesheets/accessibility.css">
+        
         <!-- Inline Critical CSS for above-the-fold content -->
         <style>
             /* Critical LCP Fix */
@@ -108,11 +111,14 @@
         <noscript><link href="Content/stylesheets/combined-purged.min.css" rel="stylesheet"></noscript>
     </head>
 <body>
+<!-- Skip Navigation Link for Keyboard Users -->
+<a href="#about" class="skip-link">Skip to main content</a>
+
 <!--==========================================
                     HEADER
 ===========================================-->
 <header id="home">
-    <nav id="theMenu" class="menu">
+    <nav id="theMenu" class="menu" aria-label="Main navigation">
         <div id="menu-options" class="menu-wrap">
             <div class="logo-flat">
                 <picture>
@@ -121,7 +127,7 @@
                                     Images/profile/alex.webp 349w"
                             sizes="(min-width: 768px) 225px, 150px"
                             type="image/webp">
-                    <img alt="personal-logo" class="img-responsive" src="Images/profile/alex-small.png" loading="lazy" width="225" height="225">
+                    <img alt="Alex Gorevski personal logo" class="img-responsive" src="Images/profile/alex-small.png" loading="lazy" width="225" height="225">
                 </picture>
             </div>
             <br>
@@ -132,13 +138,13 @@
             <a href="#interest"><i class="title-icon fa fa-heart"></i>Interests</a>
             <a href="#contact"><i class="title-icon fa fa-envelope"></i>Contact</a>
         </div>
-        <div id="menuToggle">
+        <button id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu-options">
             <div class="toggle-normal">
-                <i class="material-icons top-bar">remove</i>
-                <i class="material-icons middle-bar">remove</i>
-                <i class="material-icons bottom-bar">remove</i>
+                <i class="material-icons top-bar" aria-hidden="true">remove</i>
+                <i class="material-icons middle-bar" aria-hidden="true">remove</i>
+                <i class="material-icons bottom-bar" aria-hidden="true">remove</i>
             </div>
-        </div>
+        </button>
     </nav>
     <div class="header-background section">
         <picture>
@@ -166,7 +172,7 @@
                                             Images/profile/profile.webp 950w"
                                     sizes="(min-width: 1200px) 400px, (min-width: 768px) 350px, 200px"
                                     type="image/webp">
-                            <img alt="profile-image" class="img-responsive" src="Images/profile/profile-small.png" loading="eager" width="400" height="400">
+                            <img alt="Alex Gorevski professional headshot" class="img-responsive" src="Images/profile/profile-small.png" loading="eager" width="400" height="400">
                         </picture>
                         <div class="slant"></div>
                     </div>
@@ -240,7 +246,7 @@
             <h4 class="text-uppercase text-center">
                 <picture>
                     <source srcset="Images/icons/book.webp" type="image/webp">
-                    <img src="Images/icons/book.png" alt="book" loading="lazy" width="66" height="66" decoding="async">
+                    <img src="Images/icons/book.png" alt="" loading="lazy" width="66" height="66" decoding="async" aria-hidden="true">
                 </picture>
                 Education
             </h4>
@@ -290,7 +296,7 @@
             <h4 class="text-uppercase text-center">
                 <picture>
                     <source srcset="Images/icons/layers.webp" type="image/webp">
-                    <img src="Images/icons/layers.png" alt="stack" loading="lazy" width="66" height="66" decoding="async">
+                    <img src="Images/icons/layers.png" alt="" loading="lazy" width="66" height="66" decoding="async" aria-hidden="true">
                 </picture>
                 Experience
             </h4>
@@ -399,16 +405,17 @@
                   MODALS
 ===========================================-->
 <section>
-    <div class="modal fade" id="myModal-classhawk" tabindex="-1" aria-labelledby="myModalLabel-1" aria-hidden="true">
+    <div class="modal fade" id="myModal-classhawk" tabindex="-1" aria-labelledby="myModalLabel-classhawk" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
+                    <h4 class="modal-title visually-hidden" id="myModalLabel-classhawk">ClassHawk Project Details</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <picture>
                         <source srcset="Images/timeline/classhawk.webp" type="image/webp">
-                        <img class="img-responsive" alt="graduation" src="Images/timeline/classhawk.png" loading="lazy" width="600" height="400" decoding="async">
+                        <img class="img-responsive" alt="ClassHawk application screenshot showing course monitoring interface" src="Images/timeline/classhawk.png" loading="lazy" width="600" height="400" decoding="async">
                     </picture>
                     <p>
                         We've all been there.  You've registered for all the classes you need next semester, but your
@@ -424,12 +431,12 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal-rit" tabindex="-1" aria-labelledby="myModalLabel-1" aria-hidden="true">
+    <div class="modal fade" id="myModal-rit" tabindex="-1" aria-labelledby="myModalLabel-rit" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <h4 class="modal-title" id="myModalLabel-1">Rochester Institute of Technology</h4>
+                    <h4 class="modal-title" id="myModalLabel-rit">Rochester Institute of Technology</h4>
                     <h6><small>Sept 2003 - Feb 2008</small></h6>
                 </div>
                 <div class="modal-body">
@@ -451,7 +458,7 @@
             <h4 class="text-uppercase text-center">
                 <picture>
                     <source srcset="Images/icons/heart.webp" type="image/webp">
-                    <img src="Images/icons/heart.png" alt="heart" loading="lazy" width="66" height="66" decoding="async">
+                    <img src="Images/icons/heart.png" alt="" loading="lazy" width="66" height="66" decoding="async" aria-hidden="true">
                 </picture>
                 Interests
             </h4>
@@ -508,7 +515,7 @@
             <h4 class="text-uppercase text-center">
                 <picture>
                     <source srcset="Images/icons/envelope.webp" type="image/webp">
-                    <img src="Images/icons/envelope.png" alt="envelope" loading="lazy" width="66" height="66" decoding="async">
+                    <img src="Images/icons/envelope.png" alt="" loading="lazy" width="66" height="66" decoding="async" aria-hidden="true">
                 </picture>
                 Contact
             </h4>
@@ -535,7 +542,7 @@
                      SCROLL TO TOP
 ===========================================-->
 <div id="scroll-top">
-    <div id="scrollup"><i class="fa fa-angle-up"></i></div>
+    <button id="scrollup" aria-label="Scroll to top of page"><i class="fa fa-angle-up" aria-hidden="true"></i></button>
 </div>
 
     <!-- FOOTER -->

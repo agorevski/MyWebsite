@@ -2,6 +2,7 @@
 :root {
     /* Primary Colors */
     --primary-color: #06a763;
+    --primary-color-accessible: #057A48; /* WCAG 2.1 AA compliant - 5.3:1 contrast on white */
     --accent-color: #1976d2;
     --text-color: #616161;
     
