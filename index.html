@@ -82,6 +82,10 @@
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" rel="stylesheet"></noscript>
         
+        <!-- Bootstrap 5 CSS -->
+        <link rel="preload" href="Content/stylesheets/vendors/bootstrap5.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="Content/stylesheets/vendors/bootstrap5.min.css" rel="stylesheet"></noscript>
+        
         <!-- Async load non-critical CSS -->
         <link rel="preload" href="Content/stylesheets/combined-purged.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link href="Content/stylesheets/combined-purged.min.css" rel="stylesheet"></noscript>
@@ -300,7 +304,7 @@
                         <p>
                             I monitor and notify college students when courses they're interested in have openings.
                         </p>
-                        <a href="#" class="modal-dot" data-toggle="modal" data-target="#myModal-classhawk"><i class="fa fa-ellipsis-h" aria-hidden="true"></i><span class="sr-only">View more details about ClassHawk</span></a>
+                        <a href="#" class="modal-dot" data-bs-toggle="modal" data-bs-target="#myModal-classhawk"><i class="fa fa-ellipsis-h" aria-hidden="true"></i><span class="sr-only">View more details about ClassHawk</span></a>
                     </div>
                 </div>
             </div>
@@ -378,11 +382,11 @@
                   MODALS
 ===========================================-->
 <section>
-    <div class="modal fade" id="myModal-classhawk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-1">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="myModal-classhawk" tabindex="-1" aria-labelledby="myModalLabel-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header  text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                <div class="modal-header text-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <picture>
@@ -403,11 +407,11 @@
         </div>
     </div>
 
-    <div class="modal fade" id="myModal-rit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-1">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="myModal-rit" tabindex="-1" aria-labelledby="myModalLabel-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header  text-center">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-close"></i></span></button>
+                <div class="modal-header text-center">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <h4 class="modal-title" id="myModalLabel-1">Rochester Institute of Technology</h4>
                     <h6><small>Sept 2003 - Feb 2008</small></h6>
                 </div>
@@ -493,32 +497,16 @@
             </h4>
         </div>
         <div class="row">
-            <div id="contact-card" class="col-md-12 col-sm-12 col-xs-12"></div>
+            <div id="contact-card" class="col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
-                    <div class="card-content">
-                        <form id="contact-form" name="c-form">
-                            <div class="input-field">
-                                <input id="first_name" type="text" class="validate" name="first_name" required>
-                                <label for="first_name">Name</label>
-                            </div>
-                            <div class="input-field">
-                                <input id="sub" type="text" class="validate" name="sub">
-                                <label for="sub">Subject</label>
-                            </div>
-                            <div class="input-field">
-                                <input id="email" type="email" class="validate" name="email" required>
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-field">
-                                <textarea id="textarea1" class="materialize-textarea" name="message" required></textarea>
-                                <label for="textarea1">Message</label>
-                            </div>
-                            <div class="contact-send">
-                                <button id="submit" name="contactSubmit" type="submit" value="Submit" disabled="true" class="btn waves-effect">Send</button>
-                            </div>
-                        </form>
+                    <div class="card-content text-center">
+                        <p>Get in touch via email or connect with me on social media.</p>
+                        <p><a href="mailto:admin@alexgorevski.com" class="btn waves-effect"><i class="fa fa-envelope"></i> Email Me</a></p>
+                        <div class="social-links" style="margin-top: 20px;">
+                            <a href="https://www.linkedin.com/in/alexgorevski/" class="btn-floating blue darken-3"><i class="fa fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                            <a href="https://github.com/agorevski/" class="btn-floating purple darken-3"><i class="fa fa-github-alt"></i><span class="sr-only">GitHub</span></a>
+                        </div>
                     </div>
-                    <div id="form-loader" class="progress is-hidden"><div class="indeterminate"></div></div>
                 </div>
             </div>
         </div>
@@ -544,12 +532,11 @@
     </footer>
 
     <!-- SCRIPTS -->
-    <script src="Content/javascript/vendors/jquery-2.1.3.min.js" defer></script>
-    <script src="Content/javascript/vendors/bootstrap.min.js" defer></script>
+    <script src="Content/javascript/vendors/jquery-3.7.1.min.js" defer></script>
+    <script src="Content/javascript/vendors/bootstrap5.bundle.min.js" defer></script>
     <script src="Content/javascript/vendors/materialize.min.js" defer></script>
     <script src="Content/javascript/vendors/scrollreveal.min.js" defer></script>
     <script src="Content/javascript/custom.js" defer></script>
-    <script src="Content/toggle/js.js" defer></script>
     <script>
         // Calculate years of experience from start date
         (function() {

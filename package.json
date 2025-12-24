@@ -1,0 +1,47 @@
+{
+  "name": "mywebsite",
+  "version": "1.0.0",
+  "description": "Alexander Gorevski - Personal Website & Portfolio",
+  "author": "Alexander Gorevski",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss Content/stylesheets/*.css Content/stylesheets/vendors/*.css --dir dist/stylesheets --no-map",
+    "build:js": "esbuild Content/javascript/custom.js --bundle --minify --outfile=dist/javascript/custom.min.js",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:css": "postcss Content/stylesheets/*.css --dir dist/stylesheets --watch",
+    "watch:js": "esbuild Content/javascript/custom.js --bundle --minify --outfile=dist/javascript/custom.min.js --watch",
+    "lint": "npm-run-all lint:*",
+    "lint:css": "stylelint \"Content/stylesheets/**/*.css\"",
+    "lint:js": "eslint \"Content/javascript/**/*.js\"",
+    "lint:fix": "npm-run-all lint:*:fix",
+    "lint:css:fix": "stylelint \"Content/stylesheets/**/*.css\" --fix",
+    "lint:js:fix": "eslint \"Content/javascript/**/*.js\" --fix",
+    "format": "prettier --write \"Content/**/*.{css,js,html}\"",
+    "format:check": "prettier --check \"Content/**/*.{css,js,html}\"",
+    "optimize:images": "imagemin Images/**/*.{jpg,png,gif} --out-dir=dist/Images",
+    "clean": "rimraf dist",
+    "serve": "http-server . -p 8080 -o"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^6.0.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.2",
+    "esbuild": "^0.19.8",
+    "eslint": "^8.55.0",
+    "http-server": "^14.1.1",
+    "imagemin-cli": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "stylelint": "^16.0.2",
+    "stylelint-config-standard": "^35.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "not dead"
+  ]
+}
