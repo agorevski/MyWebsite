@@ -4,17 +4,6 @@ Based on a review of the codebase, here are recommendations to improve the websi
 
 ---
 
-## 🚀 Performance
-
-### 5. Optimize Font Loading
-- **Current:** Loading Material Icons, Raleway, and Muli from Google Fonts
-- **Recommendation:** 
-  - Self-host fonts for better performance and privacy
-  - Subset fonts to include only needed characters
-  - Use `font-display: swap` (already done via `&display=swap`)
-
----
-
 ## 📱 User Experience
 
 ### 15. Update Resume Link

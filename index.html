@@ -24,11 +24,9 @@
 
         <title>Alexander T Gorevski | Personal Website & Resume</title>
         
-        <!-- DNS prefetch and preconnect to external domains for faster resource loading -->
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- Self-hosted fonts for better performance and privacy -->
+        <link rel="preload" href="Content/fonts/material-icons/material-icons.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="Content/fonts/raleway/raleway-500.woff2" as="font" type="font/woff2" crossorigin>
         
         <!-- Preload critical LCP image -->
         <link rel="preload" as="image" href="Content/images/backgrounds/background-large.webp" type="image/webp" media="(min-width: 1281px)" fetchpriority="high">
@@ -98,9 +96,8 @@
             picture{display:contents}
         </style>
         
-        <!-- Preload and async load Google Fonts -->
-        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Muli:wght@400&family=Material+Icons&display=swap" rel="stylesheet"></noscript>
+        <!-- Self-hosted fonts CSS -->
+        <link rel="stylesheet" href="Content/stylesheets/fonts.css">
         
         <!-- Bootstrap 5 CSS -->
         <link rel="preload" href="Content/stylesheets/vendors/bootstrap5.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
