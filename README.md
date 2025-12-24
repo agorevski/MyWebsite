@@ -106,6 +106,51 @@ This site is deployed to Azure Static Web Apps via GitHub Actions.
 - Google Maps API
 - Swiper.js
 
+## 🔒 Security Configuration
+
+This site uses Azure Static Web Apps security headers configured in `staticwebapp.config.json`.
+
+### Security Headers Included
+
+| Header | Value | Purpose |
+|--------|-------|---------|
+| `X-Content-Type-Options` | `nosniff` | Prevents MIME type sniffing |
+| `X-Frame-Options` | `DENY` | Prevents clickjacking attacks |
+| `X-XSS-Protection` | `1; mode=block` | Enables XSS filtering |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | Controls referrer information |
+| `Permissions-Policy` | `geolocation=(), microphone=(), camera=()` | Disables unused browser features |
+| `Content-Security-Policy` | See config file | Restricts resource loading sources |
+
+### Subresource Integrity (SRI)
+
+All JavaScript files include SRI hashes (`integrity` attributes) to ensure files haven't been tampered with.
+
+### Updating Security Configuration
+
+To modify security headers in Azure Static Web Apps:
+
+1. Edit `staticwebapp.config.json` in the repository root
+2. Modify the `globalHeaders` section to add/change headers
+3. Commit and push changes - Azure will automatically apply the new configuration
+4. Test headers using browser DevTools (Network tab → Response Headers) or tools like [securityheaders.com](https://securityheaders.com)
+
+### Regenerating SRI Hashes
+
+If you update any JavaScript files, regenerate their SRI hashes:
+
+```powershell
+# PowerShell command to generate SHA-384 hash
+$bytes = [System.IO.File]::ReadAllBytes("path/to/file.js")
+$sha384 = [System.Security.Cryptography.SHA384]::Create()
+$hashBytes = $sha384.ComputeHash($bytes)
+$b64 = [Convert]::ToBase64String($hashBytes)
+Write-Output "sha384-$b64"
+```
+
+Or use an online tool like [srihash.org](https://www.srihash.org/).
+
+Update the `integrity` attribute in `index.html` for the corresponding `<script>` tag.
+
 ## 📄 License
 
 © Alex Gorevski 2017-2025. All rights reserved.
