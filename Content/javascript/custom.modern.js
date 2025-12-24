@@ -9,12 +9,14 @@ const App = {
         this.initNav();
         this.initSmoothScroll();
         this.initScrollToTop();
+        this.initDarkMode();
     },
 
     initNav() {
         const toggleNormal = document.querySelector('div.toggle-normal');
         const menuToggle = document.getElementById('menuToggle');
         const theMenu = document.getElementById('theMenu');
+        const menuBackdrop = document.getElementById('menuBackdrop');
         const body = document.body;
 
         const bars = {
@@ -33,8 +35,18 @@ const App = {
         const closeMenu = () => {
             theMenu?.classList.remove('menu-open');
             menuToggle?.classList.remove('active');
+            menuBackdrop?.classList.remove('active');
             body.classList.remove('body-push-toright');
             toggleBars(false);
+            menuToggle?.setAttribute('aria-expanded', 'false');
+        };
+
+        const openMenu = () => {
+            theMenu?.classList.add('menu-open');
+            menuToggle?.classList.add('active');
+            menuBackdrop?.classList.add('active');
+            body.classList.add('body-push-toright');
+            menuToggle?.setAttribute('aria-expanded', 'true');
         };
 
         toggleNormal?.addEventListener('click', () => toggleBars());
@@ -43,10 +55,25 @@ const App = {
             el.addEventListener('click', closeMenu);
         });
 
+        // Close menu when clicking backdrop
+        menuBackdrop?.addEventListener('click', closeMenu);
+
         menuToggle?.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            body.classList.toggle('body-push-toright');
-            theMenu?.classList.toggle('menu-open');
+            const isOpen = theMenu?.classList.contains('menu-open');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+            toggleBars();
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && theMenu?.classList.contains('menu-open')) {
+                closeMenu();
+                toggleBars(false);
+            }
         });
     },
 
@@ -100,6 +127,46 @@ const App = {
         scrollUpBtn?.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    },
+
+    initDarkMode() {
+        const toggle = document.getElementById('dark-mode-toggle');
+        const root = document.documentElement;
+        
+        // Check for saved preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Apply saved theme or let system preference take effect
+        if (savedTheme) {
+            root.setAttribute('data-theme', savedTheme);
+        }
+        
+        // Toggle dark mode
+        toggle?.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            let newTheme;
+            
+            if (currentTheme === 'dark') {
+                newTheme = 'light';
+            } else if (currentTheme === 'light') {
+                newTheme = 'dark';
+            } else {
+                // No explicit theme set, toggle based on system preference
+                newTheme = systemPrefersDark ? 'light' : 'dark';
+            }
+            
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // Only update if user hasn't set a manual preference
+            if (!localStorage.getItem('theme')) {
+                // The CSS handles this automatically, no JS needed
+            }
         });
     },
 

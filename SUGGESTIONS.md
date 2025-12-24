@@ -14,14 +14,16 @@ Based on a review of the codebase, here are recommendations to improve the websi
 - The experience section shows "2017 - Present" but it's now 2025
 - Consider adding more recent experience or updating dates
 
-### 17. Add Dark Mode Support
-- Add a dark mode toggle using CSS `prefers-color-scheme`
-- Many users prefer dark mode, especially developers
+### 17. Add Dark Mode Support ✅
+- ~~Add a dark mode toggle using CSS `prefers-color-scheme`~~
+- ~~Many users prefer dark mode, especially developers~~
+- **Implemented:** Added CSS custom properties for dark mode, system preference detection, manual toggle button, and localStorage persistence
 
-### 18. Improve Mobile Navigation
-- The hamburger menu is positioned at `-225px` left; consider a more visible toggle on mobile
-- Add smooth animation for menu open/close
+### 18. Improve Mobile Navigation ✅
+- ~~The hamburger menu is positioned at `-225px` left; consider a more visible toggle on mobile~~
+- ~~Add smooth animation for menu open/close~~
 - Consider a bottom navigation bar for mobile
+- **Implemented:** Fixed hamburger menu to top-left, added smooth animations, backdrop overlay, and escape key support
 
 ### 19. Add Lazy Loading for Below-Fold Content
 - Timeline content, interests section, and modals could use `loading="lazy"` on images
@@ -37,7 +39,7 @@ Based on a review of the codebase, here are recommendations to improve the websi
 | Priority | Suggestion | Impact | Effort |
 |----------|-----------|--------|--------|
 | 1 | Update resume PDF | High | Low |
-| 2 | Add dark mode CSS | Medium | Medium |
+| 2 | ~~Add dark mode CSS~~ ✅ | Medium | Medium |
 
 ---
 
