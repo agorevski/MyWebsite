@@ -40,37 +40,6 @@ Based on a review of the codebase, here are recommendations to improve the websi
 
 ---
 
-## 🛠️ Maintainability
-
-### 12. Use CSS Custom Properties (Variables)
-- Extract repeated colors (#06a763, #1976d2, #616161) into CSS variables
-- Makes theming and maintenance easier
-- Example:
-  ```css
-  :root {
-    --primary-color: #06a763;
-    --accent-color: #1976d2;
-    --text-color: #616161;
-  }
-  ```
-
-### 13. Modernize JavaScript
-- Replace jQuery with vanilla JS where possible
-- Use ES6+ features (const/let, arrow functions, template literals)
-- Consider TypeScript for type safety
-
-### 14. Add Meta Tags for SEO/Social
-- Add Open Graph tags for better social media sharing:
-  ```html
-  <meta property="og:title" content="Alexander T Gorevski | Personal Website">
-  <meta property="og:description" content="Principal Software Developer...">
-  <meta property="og:image" content="https://alexgorevski.com/Images/profile/profile.webp">
-  <meta property="og:url" content="https://alexgorevski.com">
-  <meta name="twitter:card" content="summary_large_image">
-  ```
-
----
-
 ## 📱 User Experience
 
 ### 15. Update Resume Link
