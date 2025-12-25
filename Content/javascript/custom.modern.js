@@ -49,8 +49,6 @@ const App = {
             menuToggle?.setAttribute('aria-expanded', 'true');
         };
 
-        toggleNormal?.addEventListener('click', () => toggleBars());
-
         document.querySelectorAll('.section, div#menu-options a').forEach(el => {
             el.addEventListener('click', closeMenu);
         });
