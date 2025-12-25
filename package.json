@@ -5,7 +5,9 @@
   "author": "Alexander Gorevski",
   "license": "MIT",
   "scripts": {
-    "build": "npm run build:css && npm run build:js && npm run update:sri",
+    "build": "npm run build:fontawesome && npm run build:assets && npm run build:css && npm run update:sri",
+    "build:fontawesome": "node scripts/build-fontawesome.js",
+    "build:assets": "node scripts/build-assets.js",
     "build:css": "postcss Content/stylesheets/*.css Content/stylesheets/vendors/*.css --dir dist/stylesheets --no-map",
     "build:js": "esbuild Content/javascript/custom.js --bundle --minify --outfile=dist/javascript/custom.min.js",
     "update:sri": "node scripts/update-sri.js",
@@ -25,6 +27,7 @@
     "serve": "http-server . -p 8080 -o"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.2",

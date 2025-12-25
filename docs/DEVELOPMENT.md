@@ -98,10 +98,8 @@ npm run format:check
 ```text
 Content/
 ├── stylesheets/
-│   ├── variables.css         # CSS custom properties (theming)
-│   ├── accessibility.css     # Accessibility enhancements
-│   ├── fonts.css             # Self-hosted font definitions
-│   ├── combined-purged.min.css # Main styles
+│   ├── critical.min.css      # Combined critical CSS (variables, accessibility, fonts)
+│   ├── async-noncritical.min.css # Main styles
 │   └── vendors/              # Third-party CSS
 │       └── bootstrap5.min.css
 │
@@ -125,7 +123,7 @@ Content/
 
 ### CSS Custom Properties
 
-Use CSS variables defined in `variables.css` for consistency:
+Use CSS variables defined in `critical.min.css` for consistency:
 
 ```css
 .my-component {

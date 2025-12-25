@@ -33,11 +33,8 @@
         <link rel="preload" as="image" href="Content/images/backgrounds/background-medium.webp" type="image/webp" media="(min-width: 769px) and (max-width: 1280px)" fetchpriority="high">
         <link rel="preload" as="image" href="Content/images/backgrounds/background-small.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
         
-        <!-- CSS Custom Properties (Variables) -->
-        <link rel="stylesheet" href="Content/stylesheets/variables.css">
-        
-        <!-- Accessibility Styles -->
-        <link rel="stylesheet" href="Content/stylesheets/accessibility.css">
+        <!-- Critical CSS (variables, accessibility, fonts) -->
+        <link rel="stylesheet" href="Content/stylesheets/critical.min.css">
         
         <!-- Inline Critical CSS for above-the-fold content -->
         <style>
@@ -96,16 +93,13 @@
             picture{display:contents}
         </style>
         
-        <!-- Self-hosted fonts CSS -->
-        <link rel="stylesheet" href="Content/stylesheets/fonts.css">
-        
         <!-- Bootstrap 5 CSS -->
         <link rel="preload" href="Content/stylesheets/vendors/bootstrap5.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link href="Content/stylesheets/vendors/bootstrap5.min.css" rel="stylesheet"></noscript>
         
         <!-- Async load non-critical CSS -->
-        <link rel="preload" href="Content/stylesheets/combined-purged.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link href="Content/stylesheets/combined-purged.min.css" rel="stylesheet"></noscript>
+        <link rel="preload" href="Content/stylesheets/async-noncritical.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="Content/stylesheets/async-noncritical.min.css" rel="stylesheet"></noscript>
     </head>
 <body>
 <!-- Skip Navigation Link for Keyboard Users -->
@@ -386,7 +380,7 @@
             </div>
 
             <div class="timeline-block">
-                <div class="timeline-dot"><i class="fa fa-money"></i></div>
+                <div class="timeline-dot"><i class="fa fa-money-bill"></i></div>
                 <div class="card timeline-content">
                     <div class="card-content">
                         <h6 class="timeline-title">Paychex</h6>
@@ -483,7 +477,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-6 box text-center">
                     <div class="interest-icon-even">
-                        <i class="fa fa-futbol-o"></i>
+                        <i class="fa fa-futbol"></i>
                         <span>Tennis & Soccer</span>
                     </div>
                 </div>

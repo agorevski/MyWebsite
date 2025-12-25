@@ -44,10 +44,8 @@ MyWebsite/
 │
 ├── Content/                   # Source assets
 │   ├── stylesheets/          # CSS files
-│   │   ├── variables.css     # CSS custom properties (theming)
-│   │   ├── accessibility.css # A11y enhancements
-│   │   ├── fonts.css         # Self-hosted fonts
-│   │   ├── combined-purged.min.css  # Minified combined CSS
+│   │   ├── critical.min.css  # Combined critical CSS (variables, accessibility, fonts)
+│   │   ├── async-noncritical.min.css  # Minified combined CSS
 │   │   └── vendors/          # Third-party CSS
 │   │
 │   ├── javascript/           # JavaScript files
@@ -91,7 +89,7 @@ MyWebsite/
 
 ### CSS Custom Properties
 
-The site uses CSS Custom Properties (variables) for theming, defined in `Content/stylesheets/variables.css`:
+The site uses CSS Custom Properties (variables) for theming, defined in `Content/stylesheets/critical.min.css`:
 
 ```css
 :root {
