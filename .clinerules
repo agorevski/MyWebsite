@@ -1,0 +1,88 @@
+# Cline Rules for MyWebsite (alexgorevski.com)
+
+## Project Overview
+
+This is a personal portfolio website for Alex Gorevski built with pure HTML, CSS, and JavaScript. It's deployed to Azure Static Web Apps via GitHub Actions.
+
+## Tech Stack
+
+- HTML5, CSS3, JavaScript (ES5+)
+- Bootstrap 5 for layout
+- Materialize CSS for components
+- jQuery 3.7.1
+- Font Awesome icons
+- PostCSS with autoprefixer and cssnano for CSS processing
+- esbuild for JavaScript bundling/minification
+- ESLint, Stylelint, and Prettier for code quality
+
+## Project Structure
+
+- `index.html` - Main HTML file (single-page application)
+- `Content/stylesheets/` - CSS source files
+- `Content/javascript/` - JavaScript source files
+- `dist/` - Built/minified output files
+- `Images/` - Image assets (with WebP optimized versions)
+- `scripts/` - Build utility scripts
+- `staticwebapp.config.json` - Azure Static Web Apps config with security headers
+
+## Development Guidelines
+
+### Commands
+
+- `npm run build` - Build CSS & JS with minification
+- `npm run watch` - Development watch mode
+- `npm run lint` - Run ESLint and Stylelint
+- `npm run lint:fix` - Auto-fix lint issues
+- `npm run format` - Format code with Prettier
+- `npm run serve` - Start local dev server on port 8080
+
+### CSS
+
+- Source files are in `Content/stylesheets/`
+- Built files go to `dist/stylesheets/`
+- Use CSS custom properties from `variables.css`
+- Follow existing patterns in `combined-purged.min.css`
+- Run `npm run lint:css` before committing
+
+### JavaScript
+
+- Source files are in `Content/javascript/`
+- Built files go to `dist/javascript/`
+- Use ES5+ syntax for browser compatibility
+- jQuery is available globally
+- Run `npm run lint:js` before committing
+
+### Images
+
+- Provide WebP versions for all images
+- Use `<picture>` elements with multiple sources
+- Include proper `width`, `height`, `alt`, and `loading` attributes
+- Optimize images with `npm run optimize:images`
+
+### Security
+
+- All scripts use Subresource Integrity (SRI) hashes
+- After modifying JavaScript, run `npm run update:sri` to regenerate hashes
+- Security headers are configured in `staticwebapp.config.json`
+- Content Security Policy restricts resource loading
+
+### Accessibility
+
+- Include proper `aria-` attributes
+- Use semantic HTML elements
+- Provide `sr-only` text for icon-only links
+- Maintain keyboard navigation support
+- Include skip navigation link
+
+## Don't Modify
+
+- `node_modules/` - Dependencies (managed by npm)
+- `.github/workflows/` - CI/CD configuration (modify with caution)
+- Vendor files in `Content/*/vendors/`
+
+## Before Committing
+
+1. Run `npm run lint` to check for issues
+2. Run `npm run format` to ensure consistent formatting
+3. Run `npm run build` to generate production assets
+4. Test locally with `npm run serve`
