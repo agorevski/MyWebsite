@@ -1,0 +1,27 @@
+# Node modules - not needed for static site deployment
+node_modules
+
+# Source files (built versions are in dist/)
+Content
+
+# Build configuration files
+.github
+scripts
+.eslintrc.json
+.prettierignore
+.prettierrc
+.stylelintrc.json
+postcss.config.js
+package.json
+package-lock.json
+
+# Documentation
+README.md
+SUGGESTIONS.md
+docs
+
+# IDE and OS files
+.vscode
+.idea
+.DS_Store
+Thumbs.db
