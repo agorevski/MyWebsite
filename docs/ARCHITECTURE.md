@@ -28,8 +28,8 @@ This document describes the architecture and structure of Alex Gorevski's person
 | **Hosting** | Azure Static Web Apps | Global CDN, SSL, custom domains |
 | **CI/CD** | GitHub Actions | Automated deployment on push |
 | **HTML** | HTML5 | Semantic markup, accessibility |
-| **CSS** | Bootstrap 5, Materialize, Custom | Responsive layout, components |
-| **JavaScript** | jQuery, ScrollReveal | Interactivity, animations |
+| **CSS** | Bootstrap 5, Custom | Responsive layout, components |
+| **JavaScript** | Vanilla ES6+, Bootstrap 5 | Interactivity, animations |
 | **Build Tools** | PostCSS, esbuild | CSS optimization, JS bundling |
 
 ## Project Structure
@@ -124,38 +124,46 @@ Source CSS → PurgeCSS → Autoprefixer → cssnano → Minified CSS
 The JavaScript follows a modular IIFE (Immediately Invoked Function Expression) pattern:
 
 ```javascript
-(function($) {
-    "use strict";
+// Modern JavaScript with ES6+ features
+// Vanilla JS replacement for jQuery-based custom.js
+// Uses native IntersectionObserver for scroll reveal animations
+
+const App = {
+    init() {
+        this.initNav();
+        this.initSmoothScroll();
+        this.initScrollToTop();
+        this.initDarkMode();
+        this.initLazySections();
+    },
     
     // Navigation initialization
-    function initNav() { /* ... */ }
+    initNav() { /* ... */ },
     
-    // Smooth scrolling
-    function initSmoothScroll() { /* ... */ }
+    // Smooth scrolling using native scrollIntoView
+    initSmoothScroll() { /* ... */ },
     
-    // Scroll-to-top button
-    function initScrollToTop() { /* ... */ }
+    // Scroll-to-top button with passive scroll listener
+    initScrollToTop() { /* ... */ },
     
-    // Initialize on DOM ready
-    jQuery(document).on('ready', function() {
-        initNav();
-        initSmoothScroll();
-        initScrollToTop();
-    });
-    
-    // ScrollReveal animations on load
-    jQuery(window).on('load', function() { /* ... */ });
-})(jQuery);
+    // IntersectionObserver-based scroll reveal animations
+    initScrollReveal() { /* ... */ },
+};
+
+// Initialize on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => App.init());
+
+// Initialize reveal animations on load
+window.addEventListener('load', () => App.initScrollReveal());
 ```
 
 ### Third-Party Libraries
 
 | Library | Version | Purpose |
 | ------- | ------- | ------- |
-| jQuery | 3.7.1 | DOM manipulation |
-| Bootstrap 5 | 5.x | Modal dialogs, grid layout |
-| Materialize | Custom | Toast notifications, components |
-| ScrollReveal | Latest | Scroll-based animations |
+| Bootstrap 5 | 5.3.x | Modal dialogs, grid layout, components |
+
+> **Note**: jQuery, Materialize, and ScrollReveal were removed in favor of vanilla ES6+ JavaScript with native `IntersectionObserver` for scroll animations. This reduces the JS bundle size by ~100KB+.
 
 ## Image Optimization
 

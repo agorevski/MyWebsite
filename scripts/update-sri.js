@@ -12,12 +12,10 @@ const crypto = require('crypto');
 const config = {
     htmlFile: path.join(__dirname, '..', 'index.html'),
     // JS files to generate SRI hashes for (relative to project root)
-    // Note: jQuery removed - using vanilla JS in custom.modern.js
+    // Note: jQuery, Materialize, and ScrollReveal removed - using vanilla JS with native IntersectionObserver
     jsFiles: [
         'Content/javascript/custom.modern.js',
-        'Content/javascript/vendors/bootstrap5.bundle.min.js',
-        'Content/javascript/vendors/materialize.min.js',
-        'Content/javascript/vendors/scrollreveal.min.js'
+        'Content/javascript/vendors/bootstrap5.bundle.min.js'
     ],
     // CSS files to generate SRI hashes for (relative to project root)
     cssFiles: [

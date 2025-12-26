@@ -83,38 +83,14 @@ function getFileSizeKB(filePath) {
 }
 
 /**
- * Copy vendor packages from node_modules to Content/javascript/vendors
- */
-function copyNodeModulesVendors() {
-    console.log('\n📦 Copying vendor packages from node_modules...\n');
-    
-    const vendorsDir = path.join(config.contentDir, 'javascript', 'vendors');
-    ensureDir(vendorsDir);
-    
-    // Materialize CSS
-    const materializeSrc = path.join(config.rootDir, 'node_modules', 'materialize-css', 'dist', 'js', 'materialize.min.js');
-    const materializeDest = path.join(vendorsDir, 'materialize.min.js');
-    
-    if (fs.existsSync(materializeSrc)) {
-        fs.copyFileSync(materializeSrc, materializeDest);
-        console.log(`  ✓ materialize.min.js (${getFileSizeKB(materializeDest)} KB)`);
-    } else {
-        console.warn('  ⚠ materialize-css not found in node_modules');
-    }
-}
-
-/**
  * Bundle and minify JavaScript files using esbuild
  */
 function buildJavaScript() {
     console.log('\n📦 Building JavaScript...\n');
     
-    // Copy vendor packages from node_modules first
-    copyNodeModulesVendors();
-    
     // Discover JS files dynamically
     const jsFiles = discoverJsFiles();
-    console.log(`\n  Discovered ${jsFiles.vendors.length} vendor scripts, ${jsFiles.custom.length} custom scripts\n`);
+    console.log(`  Discovered ${jsFiles.vendors.length} vendor scripts, ${jsFiles.custom.length} custom scripts\n`);
     
     const jsDistDir = path.join(config.distDir, 'javascript');
     const vendorsDistDir = path.join(jsDistDir, 'vendors');

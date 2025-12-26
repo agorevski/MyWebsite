@@ -1,6 +1,7 @@
 /**
  * Modern JavaScript with ES6+ features
  * Vanilla JS replacement for jQuery-based custom.js
+ * Uses native IntersectionObserver for scroll reveal animations (no library dependencies)
  */
 'use strict';
 
@@ -198,31 +199,54 @@ const App = {
   },
 
   initScrollReveal() {
-    if (typeof ScrollReveal === 'undefined') return;
+    // Native IntersectionObserver replacement for ScrollReveal
+    // This provides similar reveal-on-scroll animations without the library dependency
+    const revealElements = document.querySelectorAll(
+      '#map-card, .interest-icon-even, .interest-icon, .timeline-dot, .timeline-content, #interest-card, #contact-card, .section-title img, #about-card, .map-label, #v-card-holder'
+    );
 
-    const sr = ScrollReveal({ reset: false });
+    if (!revealElements.length) return;
 
-    const commonCards = [
-      '#map-card',
-      '.interest-icon-even',
-      '.interest-icon',
-      '.timeline-dot',
-      '.timeline-content',
-      '#interest-card',
-      '#contact-card',
-      '.section-title img',
-    ].join(',');
+    // Add initial hidden state via CSS
+    revealElements.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    });
 
-    sr.reveal(commonCards, { duration: 1100 });
-    sr.reveal('#about-card, .map-label', { duration: 1400, delay: 500 });
-    sr.reveal('#v-card-holder', { duration: 1400, distance: '150px' });
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Reveal the element
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: '0px 0px -50px 0px',
+          threshold: 0.1,
+        }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      revealElements.forEach((el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    }
   },
 };
 
 // Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => App.init());
 
-// Initialize ScrollReveal on load
+// Initialize reveal animations on load
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading');
   if (loading) {

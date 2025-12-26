@@ -5,9 +5,10 @@
   "author": "Alexander Gorevski",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && npm run optimize:images && npm run extract:fontawesome && npm run build:css && npm run build:js && npm run bundle:assets && npm run critical:generate && npm run critical:apply && npm run update:sri",
+    "build": "npm run clean && npm run optimize:images && npm run generate:avif && npm run extract:fontawesome && npm run build:css && npm run build:js && npm run bundle:assets && npm run critical:generate && npm run critical:apply && npm run update:sri",
     "clean": "rimraf dist",
     "optimize:images": "imagemin Images/**/*.{jpg,png,gif} --out-dir=dist/Images",
+    "generate:avif": "node scripts/generate-avif.js",
     "extract:fontawesome": "node scripts/extract-fontawesome.js",
     "build:css": "postcss Content/stylesheets/*.css Content/stylesheets/vendors/*.css --dir dist/stylesheets --no-map",
     "build:js": "esbuild Content/javascript/custom.modern.js --bundle --minify --target=es2020 --outfile=dist/javascript/custom.modern.min.js",
@@ -39,6 +40,7 @@
     "postcss-cli": "^11.0.0",
     "prettier": "^3.1.1",
     "rimraf": "^5.0.5",
+    "sharp": "^0.34.5",
     "stylelint": "^16.0.2",
     "stylelint-config-standard": "^35.0.0"
   },
