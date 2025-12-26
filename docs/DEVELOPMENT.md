@@ -30,12 +30,15 @@ Visit `http://localhost:8080` in your browser.
 
 | Command | Description |
 | ------- | ----------- |
-| `npm run build` | Full build: CSS, JS, and SRI hashes |
+| `npm run build` | Full build: CSS, JS, images, critical CSS, and SRI hashes |
 | `npm run build:css` | Build CSS only (purge, prefix, minify) |
-| `npm run build:js` | Bundle and minify JavaScript |
+| `npm run build:js` | Bundle and minify JavaScript (ES2020 target) |
 | `npm run update:sri` | Regenerate SRI hashes in index.html |
-| `npm run watch` | Watch mode for development |
 | `npm run clean` | Remove the dist folder |
+| `npm run optimize:images` | Optimize images with imagemin |
+| `npm run generate:avif` | Generate AVIF images from existing files |
+| `npm run critical:generate` | Extract critical CSS for above-the-fold |
+| `npm run critical:apply` | Apply critical CSS inline to HTML |
 
 ### Code Quality
 
@@ -47,37 +50,30 @@ Visit `http://localhost:8080` in your browser.
 | `npm run lint:fix` | Auto-fix lint issues |
 | `npm run lint:css:fix` | Auto-fix CSS lint issues |
 | `npm run lint:js:fix` | Auto-fix JS lint issues |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check formatting without changes |
 
 ### Development
 
 | Command | Description |
 | ------- | ----------- |
 | `npm run serve` | Start local HTTP server on port 8080 |
-| `npm run watch` | Watch for file changes and rebuild |
-| `npm run optimize:images` | Optimize images with imagemin |
+| `npm run update:github` | Fetch latest GitHub contributions data |
 
 ## Development Workflow
 
-### 1. Start Watch Mode
-
-```bash
-npm run watch
-```
-
-This runs two parallel watchers:
-
-- **CSS watcher**: Rebuilds on `Content/stylesheets/**/*.css` changes
-- **JS watcher**: Rebuilds on `Content/javascript/custom.js` changes
-
-### 2. Make Changes
+### 1. Make Changes
 
 Edit files in the `Content/` directory:
 
 - **CSS**: `Content/stylesheets/*.css`
-- **JavaScript**: `Content/javascript/custom.js`
+- **JavaScript**: `Content/javascript/custom.modern.js`
 - **HTML**: `index.html`
+
+### 2. Build and Test
+
+```bash
+npm run build    # Build all assets
+npm run serve    # Test locally at localhost:8080
+```
 
 ### 3. Check Output
 
@@ -85,12 +81,12 @@ Built files are output to `dist/`:
 
 - `dist/stylesheets/` - Compiled CSS
 - `dist/javascript/` - Bundled JavaScript
+- `dist/Images/` - Optimized images
 
 ### 4. Lint Before Commit
 
 ```bash
 npm run lint
-npm run format:check
 ```
 
 ## File Structure for Development
@@ -98,19 +94,28 @@ npm run format:check
 ```text
 Content/
 ├── stylesheets/
-│   ├── critical.min.css      # Combined critical CSS (variables, accessibility, fonts)
-│   ├── async-noncritical.min.css # Main styles
-│   └── vendors/              # Third-party CSS
+│   ├── critical.min.css          # Critical CSS (variables, fonts, accessibility)
+│   ├── async-noncritical.min.css # Async-loaded non-critical styles
+│   ├── style.min.css             # Combined styles
+│   ├── generated-critical.css    # Auto-extracted critical CSS
+│   └── vendors/                  # Third-party CSS
 │       └── bootstrap5.min.css
 │
-└── javascript/
-    ├── custom.js             # Main application logic (source)
-    ├── custom.modern.js      # ES6+ version
-    └── vendors/              # Third-party libraries
-        ├── jquery-3.7.1.min.js
-        ├── bootstrap5.bundle.min.js
-        ├── materialize.min.js
-        └── scrollreveal.min.js
+├── javascript/
+│   ├── custom.modern.js          # Main application logic (ES6+ source)
+│   ├── custom.modern.min.js      # Minified output
+│   └── vendors/                  # Third-party libraries
+│       └── bootstrap5.bundle.min.js
+│
+├── fonts/                        # Self-hosted fonts
+│   ├── material-icons/
+│   ├── raleway/
+│   ├── muli/
+│   ├── fa-brands-400.woff2
+│   └── fa-solid-900.woff2
+│
+└── images/
+    └── backgrounds/              # Responsive backgrounds (AVIF, WebP, JPG)
 ```
 
 ## CSS Development
@@ -118,7 +123,7 @@ Content/
 ### Adding New Styles
 
 1. Edit the appropriate CSS file in `Content/stylesheets/`
-2. Run `npm run build:css` or use `npm run watch`
+2. Run `npm run build:css` to process with PostCSS
 3. PurgeCSS will automatically remove unused styles
 
 ### CSS Custom Properties
@@ -130,7 +135,6 @@ Use CSS variables defined in `critical.min.css` for consistency:
     color: var(--primary-color);
     background: var(--bg-color);
     box-shadow: var(--card-shadow);
-    transition: var(--transition-fast);
 }
 ```
 
@@ -173,44 +177,71 @@ safelist: {
 
 ### Module Pattern
 
-The codebase uses an IIFE pattern with jQuery:
+The codebase uses vanilla ES6+ JavaScript:
 
 ```javascript
-(function($) {
-    "use strict";
+const App = {
+    init() {
+        this.initNav();
+        this.initSmoothScroll();
+        this.initScrollToTop();
+        this.initDarkMode();
+        this.initLazySections();
+    },
     
-    function myFeature() {
-        // Your code here
-    }
+    initNav() {
+        // Mobile menu handling
+    },
     
-    $(document).on('ready', function() {
-        myFeature();
-    });
-})(jQuery);
+    initSmoothScroll() {
+        // Native scrollIntoView
+    },
+    
+    initScrollToTop() {
+        // Passive scroll listener
+    },
+    
+    initDarkMode() {
+        // localStorage persistence
+    },
+    
+    initLazySections() {
+        // IntersectionObserver for lazy loading
+    },
+    
+    initScrollReveal() {
+        // IntersectionObserver for reveal animations
+    },
+};
+
+document.addEventListener('DOMContentLoaded', () => App.init());
+window.addEventListener('load', () => App.initScrollReveal());
 ```
 
 ### Adding New Features
 
-1. Add your function to `Content/javascript/custom.js`
-2. Call it in the `document.ready` handler
+1. Add your function to `Content/javascript/custom.modern.js`
+2. Call it in the `init()` method or appropriate event
 3. Run `npm run build:js` to bundle
 4. Run `npm run update:sri` to update integrity hashes
 
 ### Build Output
 
-esbuild bundles and minifies `custom.js` to:
+esbuild bundles and minifies `custom.modern.js` to:
 
 ```text
-dist/javascript/custom.min.js
+dist/javascript/custom.modern.min.js
 ```
+
+Target: ES2020 for modern browser support.
 
 ## SRI (Subresource Integrity)
 
-All JavaScript files use SRI hashes for security.
+All JavaScript and CSS files use SRI hashes for security.
 
 ### Automatic Update
 
-After modifying JavaScript files:
+After modifying JavaScript or CSS files:
 
 ```bash
 npm run update:sri
@@ -218,7 +249,7 @@ npm run update:sri
 
 This runs `scripts/update-sri.js` which:
 
-1. Calculates SHA-384 hashes for all JS files
+1. Calculates SHA-384 hashes for all JS/CSS files
 2. Updates `integrity` attributes in `index.html`
 
 ### Manual Hash Generation (PowerShell)
@@ -255,20 +286,22 @@ npm run lint:css:fix  # Auto-fix
 
 Configuration: `.prettierrc`
 
-```bash
-npm run format        # Format files
-npm run format:check  # Check only
-```
+Prettier can be run manually but is not included in the default workflow.
 
 ## Adding Images
 
 1. Add images to the `Images/` directory
-2. Create WebP versions for modern browsers
-3. Create multiple sizes for responsive loading
-4. Use the `<picture>` element:
+2. Run `npm run generate:avif` to create AVIF versions
+3. Create WebP versions for fallback
+4. Use the `<picture>` element with multiple formats:
 
 ```html
 <picture>
+    <source srcset="image-small.avif 400w,
+                    image-medium.avif 800w,
+                    image.avif 1200w"
+            sizes="(min-width: 1200px) 400px, 350px"
+            type="image/avif">
     <source srcset="image-small.webp 400w,
                     image-medium.webp 800w,
                     image.webp 1200w"
@@ -319,3 +352,12 @@ npm run update:sri
 ```
 
 This regenerates all hashes based on current file contents.
+
+### Critical CSS Issues
+
+If critical CSS extraction fails:
+
+```bash
+npm run critical:generate
+npm run critical:apply
+```

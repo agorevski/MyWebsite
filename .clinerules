@@ -2,75 +2,83 @@
 
 ## Project Overview
 
-This is a personal portfolio website for Alex Gorevski built with pure HTML, CSS, and JavaScript. It's deployed to Azure Static Web Apps via GitHub Actions.
+This is a personal portfolio website for Alex Gorevski built with HTML, CSS, and vanilla JavaScript (ES6+). It's deployed to Azure Static Web Apps via GitHub Actions.
 
 ## Tech Stack
 
-- HTML5, CSS3, JavaScript (ES5+)
-- Bootstrap 5 for layout
-- Materialize CSS for components
-- jQuery 3.7.1
-- Font Awesome icons
-- PostCSS with autoprefixer and cssnano for CSS processing
-- esbuild for JavaScript bundling/minification
+- HTML5, CSS3, JavaScript (ES6+)
+- Bootstrap 5 for layout and modals
+- Font Awesome icons (self-hosted)
+- Material Icons (self-hosted)
+- PostCSS with autoprefixer, cssnano, and PurgeCSS for CSS processing
+- esbuild for JavaScript bundling/minification (target: ES2020)
+- Critical CSS extraction for performance
 - ESLint, Stylelint, and Prettier for code quality
+- Sharp for AVIF image generation
 
 ## Project Structure
 
 - `index.html` - Main HTML file (single-page application)
-- `Content/stylesheets/` - CSS source files
-- `Content/javascript/` - JavaScript source files
+- `Content/stylesheets/` - CSS source files (critical.min.css, async-noncritical.min.css)
+- `Content/javascript/` - JavaScript source files (custom.modern.js)
+- `Content/fonts/` - Self-hosted fonts (Raleway, Muli, Material Icons, FontAwesome)
+- `Content/images/` - Content images with responsive variants
 - `dist/` - Built/minified output files
-- `Images/` - Image assets (with WebP optimized versions)
-- `scripts/` - Build utility scripts
+- `Images/` - Image assets (with WebP and AVIF optimized versions)
+- `scripts/` - Build utility scripts (update-sri.js, extract-critical-css.mjs, generate-avif.js, etc.)
+- `data/` - JSON data files (github-contributions.json)
 - `staticwebapp.config.json` - Azure Static Web Apps config with security headers
 
 ## Development Guidelines
 
 ### Commands
 
-- `npm run build` - Build CSS & JS with minification
-- `npm run watch` - Development watch mode
+- `npm run build` - Full build: CSS, JS, images, critical CSS, and SRI hashes
+- `npm run build:css` - Build CSS only (purge, prefix, minify)
+- `npm run build:js` - Bundle and minify JavaScript
+- `npm run update:sri` - Regenerate SRI hashes in index.html
 - `npm run lint` - Run ESLint and Stylelint
 - `npm run lint:fix` - Auto-fix lint issues
-- `npm run format` - Format code with Prettier
 - `npm run serve` - Start local dev server on port 8080
 
 ### CSS
 
 - Source files are in `Content/stylesheets/`
-- Built files go to `dist/stylesheets/`
-- Use CSS custom properties from `variables.css`
-- Follow existing patterns in `combined-purged.min.css`
+- Critical CSS is inlined in `<head>` for above-the-fold content
+- Non-critical CSS loaded async via `async-noncritical.min.css`
+- Use CSS custom properties from `critical.min.css`
 - Run `npm run lint:css` before committing
 
 ### JavaScript
 
-- Source files are in `Content/javascript/`
-- Built files go to `dist/javascript/`
-- Use ES5+ syntax for browser compatibility
-- jQuery is available globally
+- Source file: `Content/javascript/custom.modern.js`
+- Built to: `dist/javascript/custom.modern.min.js`
+- Uses ES6+ syntax (IntersectionObserver, native DOM APIs)
+- No jQuery dependency - vanilla JavaScript only
+- Bootstrap 5 bundle is the only vendor dependency
 - Run `npm run lint:js` before committing
 
 ### Images
 
-- Provide WebP versions for all images
-- Use `<picture>` elements with multiple sources
+- Provide AVIF, WebP, and fallback (PNG/JPG) versions
+- Use `<picture>` elements with multiple sources and sizes
 - Include proper `width`, `height`, `alt`, and `loading` attributes
+- Generate AVIF with `npm run generate:avif`
 - Optimize images with `npm run optimize:images`
 
 ### Security
 
 - All scripts use Subresource Integrity (SRI) hashes
-- After modifying JavaScript, run `npm run update:sri` to regenerate hashes
+- After modifying JavaScript/CSS, run `npm run update:sri` to regenerate hashes
 - Security headers are configured in `staticwebapp.config.json`
 - Content Security Policy restricts resource loading
+- CSP includes `https://api.github.com` for contributions graph
 
 ### Accessibility
 
 - Include proper `aria-` attributes
-- Use semantic HTML elements
-- Provide `sr-only` text for icon-only links
+- Use semantic HTML elements (`<header>`, `<main>`, `<section>`, `<article>`, `<footer>`)
+- Provide `sr-only` and `visually-hidden` text for icon-only links
 - Maintain keyboard navigation support
 - Include skip navigation link
 
@@ -83,6 +91,5 @@ This is a personal portfolio website for Alex Gorevski built with pure HTML, CSS
 ## Before Committing
 
 1. Run `npm run lint` to check for issues
-2. Run `npm run format` to ensure consistent formatting
-3. Run `npm run build` to generate production assets
-4. Test locally with `npm run serve`
+2. Run `npm run build` to generate production assets
+3. Test locally with `npm run serve`

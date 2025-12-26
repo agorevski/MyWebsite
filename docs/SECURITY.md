@@ -7,7 +7,7 @@ This document details the security measures implemented in the portfolio website
 The site implements defense-in-depth with multiple security layers:
 
 1. **HTTP Security Headers** - Browser-level protections
-2. **Subresource Integrity (SRI)** - Script tampering prevention
+2. **Subresource Integrity (SRI)** - Script and stylesheet tampering prevention
 3. **Content Security Policy (CSP)** - Resource loading restrictions
 4. **HTTPS Everywhere** - Transport layer security
 
@@ -23,7 +23,7 @@ Configured in `staticwebapp.config.json`:
     "X-XSS-Protection": "1; mode=block",
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "Permissions-Policy": "geolocation=(), microphone=(), camera=()",
-    "Content-Security-Policy": "..."
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.github.com; frame-ancestors 'none'"
   }
 }
 ```
@@ -48,7 +48,7 @@ script-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
 font-src 'self' https://fonts.gstatic.com;
 img-src 'self' data: https:;
-connect-src 'self';
+connect-src 'self' https://api.github.com;
 frame-ancestors 'none'
 ```
 
@@ -61,17 +61,18 @@ frame-ancestors 'none'
 | `style-src` | `'self' 'unsafe-inline'` | Same origin + inline styles |
 | `font-src` | `'self' https://fonts.gstatic.com` | Same origin + Google Fonts |
 | `img-src` | `'self' data: https:` | Same origin + data URIs + HTTPS |
-| `connect-src` | `'self'` | XHR/fetch to same origin only |
+| `connect-src` | `'self' https://api.github.com` | XHR/fetch to same origin + GitHub API |
 | `frame-ancestors` | `'none'` | Cannot be embedded in frames |
 
 ### CSP Considerations
 
-- **`'unsafe-inline'`**: Required for inline styles/scripts in the HTML. Consider moving to external files and using nonces for stricter CSP.
+- **`'unsafe-inline'`**: Required for inline styles/scripts in the HTML (critical CSS). Consider using nonces for stricter CSP.
 - **Google Fonts**: If you self-host all fonts (which this site does), you can remove the Google Fonts exceptions.
+- **GitHub API**: Allowed for the GitHub contributions widget.
 
 ## Subresource Integrity (SRI)
 
-All JavaScript files include SRI hashes to ensure they haven't been tampered with.
+All JavaScript and CSS files include SRI hashes to ensure they haven't been tampered with.
 
 ### How SRI Works
 
@@ -80,28 +81,31 @@ All JavaScript files include SRI hashes to ensure they haven't been tampered wit
         integrity="sha384-abc123..." 
         crossorigin="anonymous">
 </script>
+
+<link rel="stylesheet" href="styles.css"
+      integrity="sha384-xyz789..."
+      crossorigin="anonymous">
 ```
 
 The browser:
 
-1. Downloads the script
+1. Downloads the resource
 2. Calculates its SHA-384 hash
 3. Compares with the `integrity` attribute
-4. **Blocks execution** if hashes don't match
+4. **Blocks loading** if hashes don't match
 
-### Protected Scripts
+### Protected Resources
 
-| File | Protection |
-| ---- | ---------- |
-| `jquery-3.7.1.min.js` | SRI hash |
-| `bootstrap5.bundle.min.js` | SRI hash |
-| `materialize.min.js` | SRI hash |
-| `scrollreveal.min.js` | SRI hash |
-| `custom.modern.js` | SRI hash |
+| File | Type | Protection |
+| ---- | ---- | ---------- |
+| `bootstrap5.min.css` | CSS | SRI hash |
+| `async-noncritical.min.css` | CSS | SRI hash |
+| `bootstrap5.bundle.min.js` | JS | SRI hash |
+| `custom.modern.js` | JS | SRI hash |
 
 ### Updating SRI Hashes
 
-When JavaScript files are modified:
+When JavaScript or CSS files are modified:
 
 ```bash
 npm run update:sri
@@ -109,7 +113,7 @@ npm run update:sri
 
 This runs `scripts/update-sri.js` which:
 
-1. Reads each JS file
+1. Reads each JS/CSS file
 2. Calculates SHA-384 hash
 3. Updates the `integrity` attribute in `index.html`
 
@@ -141,7 +145,6 @@ Azure Static Web Apps provides:
 
 - **Automatic SSL certificates** via Let's Encrypt
 - **TLS 1.2+** minimum version
-- **HSTS** (HTTP Strict Transport Security) consideration
 - **Automatic HTTP → HTTPS redirect**
 
 ## Security Checklist
@@ -180,7 +183,7 @@ Test your security headers at:
 ### SRI Verification
 
 1. Open DevTools → Network tab
-2. Find a JS file → Headers
+2. Find a JS/CSS file → Headers
 3. Verify `integrity` attribute matches
 
 ## Incident Response
@@ -198,7 +201,7 @@ Test your security headers at:
 If you discover a security vulnerability:
 
 1. **Do not** open a public issue
-2. Email: [admin@alexgorevski.com](admin@alexgorevski.com)
+2. Email: [admin@alexgorevski.com](mailto:admin@alexgorevski.com)
 3. Include: Description, steps to reproduce, potential impact
 
 ## Additional Hardening (Future Considerations)

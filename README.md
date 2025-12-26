@@ -1,6 +1,6 @@
 # Alex Gorevski - Personal Portfolio Website
 
-A modern static portfolio website built with HTML, CSS, and JavaScript. Features responsive design, dark mode, accessibility (WCAG 2.1 AA), and security best practices.
+A modern static portfolio website built with HTML, CSS, and vanilla JavaScript (ES6+). Features responsive design, dark mode, accessibility (WCAG 2.1 AA), and security best practices.
 
 **🌐 Live Site: [www.alexgorevski.com](https://www.alexgorevski.com)**
 
@@ -16,7 +16,7 @@ npm run serve    # Opens http://localhost:8080
 ## Documentation
 
 | Document | Description |
-|----------|-------------|
+| -------- | ----------- |
 | [Architecture](docs/ARCHITECTURE.md) | Project structure, tech stack, CSS/JS patterns |
 | [Development](docs/DEVELOPMENT.md) | Local setup, build commands, development workflow |
 | [Deployment](docs/DEPLOYMENT.md) | Azure Static Web Apps, GitHub Actions CI/CD |
@@ -24,7 +24,7 @@ npm run serve    # Opens http://localhost:8080
 
 ## Tech Stack
 
-HTML5 • CSS3 • JavaScript • Bootstrap 5 • jQuery • PostCSS • esbuild • Azure Static Web Apps
+HTML5 • CSS3 • Vanilla JavaScript (ES6+) • Bootstrap 5 • PostCSS • esbuild • Critical CSS • Azure Static Web Apps
 
 ## License
 
