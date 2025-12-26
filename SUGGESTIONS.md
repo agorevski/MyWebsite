@@ -1,6 +1,6 @@
 # Website Improvement Suggestions
 
-A comprehensive analysis of `index.html` and the build system with recommendations for design, performance, modernization, and engineering efficiency.
+Recommendations for design, performance, modernization, and engineering efficiency.
 
 ---
 
@@ -15,34 +15,6 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
 - **Current**: Monolithic CSS files
 - **Suggestion**: Consider CSS Modules or BEM methodology for component isolation
 - **Impact**: Better maintainability as the site grows
-
----
-
-## ⚡ Performance Improvements
-
-### 1. Optimize GitHub API Calls
-- **Current**: Makes up to 10+ sequential API calls for contributions data
-- **Suggestion**: 
-  - Cache results in `localStorage` with 1-hour expiry
-  - Use a serverless function to aggregate data server-side
-  - Consider using GitHub's GraphQL API for a single request
-- **Impact**: Faster loading, reduced rate limiting risk
-- ✅ **COMPLETED**: Implemented 24-hour localStorage caching and historical JSON data file (`data/github-contributions.json`) with merge support
-
-### 2. Font Subsetting
-- **Current**: Self-hosted fonts with preload and `font-display: swap` ✅
-- **Suggestion**: Consider subsetting fonts to only used characters
-- **Impact**: Smaller font files
-- ℹ️ **Optimized**: Fonts already use unicode-range subsetting in @font-face declarations
-
-### 3. Remove Unused CSS
-- **Current**: PurgeCSS configured but loading both Bootstrap AND Materialize CSS
-- **Suggestion**: 
-  - Audit actual CSS usage with Coverage DevTools
-  - Remove bootstrap.min.css (keeping only bootstrap5.min.css)
-  - Consider Tailwind CSS for utility-first approach with automatic tree-shaking
-- **Impact**: Significantly smaller CSS bundle
-- ✅ **COMPLETED**: Removed bootstrap.min.css (old Bootstrap v3), keeping only bootstrap5.min.css
 
 ---
 
@@ -68,15 +40,6 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
 - **Suggestion**: Migrate to TypeScript for type safety
 - **Impact**: Catch bugs at compile time, better IDE support
 
-### 4. HTML Structure Improvements
-- **Current**: Some accessibility improvements in place
-- **Suggestions**:
-  - Add `aria-label` to icon-only buttons
-  - Ensure all interactive elements are keyboard accessible
-  - Add skip-to-content link (already present ✓)
-  - Use semantic HTML5 elements consistently (`<article>`, `<aside>`)
-- **Impact**: Better accessibility scores
-
 ---
 
 ## 🛠️ Engineering Efficiency
@@ -95,15 +58,7 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
   ```
 - **Impact**: Instant feedback during development
 
-### 2. Automate Image Optimization Pipeline
-- **Current**: `imagemin` for optimization
-- **Suggestion**: Add automatic WebP/AVIF generation:
-  ```json
-  "optimize:images": "sharp-cli --input Images/**/*.{jpg,png} --output dist/Images --webp --avif"
-  ```
-- **Impact**: Automatic multi-format image generation
-
-### 3. Add Pre-commit Hooks
+### 2. Add Pre-commit Hooks
 - **Current**: Manual linting
 - **Suggestion**: Use Husky + lint-staged:
   ```json
@@ -116,17 +71,17 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
   ```
 - **Impact**: Consistent code quality, catch issues before commit
 
-### 4. Bundle Analysis
+### 3. Bundle Analysis
 - **Current**: No visibility into bundle composition
 - **Suggestion**: Add `webpack-bundle-analyzer` or Vite's built-in visualizer
 - **Impact**: Identify optimization opportunities
 
-### 5. Environment-Based Configuration
+### 4. Environment-Based Configuration
 - **Current**: Hardcoded values
 - **Suggestion**: Add `.env` support for API keys, feature flags
 - **Impact**: Easier staging/production management
 
-### 6. Component Documentation
+### 5. Component Documentation
 - **Current**: No component documentation
 - **Suggestion**: Add JSDoc comments or consider Storybook for visual component library
 - **Impact**: Easier onboarding, component reuse
@@ -135,52 +90,27 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
 
 ## 📊 Quick Wins (Low Effort, High Impact)
 
-| Priority | Suggestion | Effort | Impact | Status |
-|----------|------------|--------|--------|--------|
-| 1 | Choose one CSS framework | Low | High | ✅ Done |
-| 2 | Cache GitHub API responses in localStorage | Low | Medium | ✅ Done |
-| 3 | Add pre-commit hooks | Low | Medium | |
-| 4 | Migrate to Vite | Medium | High | |
+| Priority | Suggestion | Effort | Impact |
+|----------|------------|--------|--------|
+| 1 | Add pre-commit hooks | Low | Medium |
+| 2 | Migrate to Vite | Medium | High |
+| 3 | Add service worker | Medium | Medium |
 
 ---
 
 ## 🔐 Security Considerations
-
-### Already Implemented ✓
-- SRI hashes on scripts
-- Security headers in `staticwebapp.config.json`
-- Content Security Policy
-- ~~**Add Subresource Integrity for CSS**~~ ✅ COMPLETED - Added SRI hashes to all CSS files
-- ~~**Regular dependency audits**~~ ✅ COMPLETED - Added `npm audit --audit-level=high` step to GitHub Actions workflow
 
 ### Suggestions
 1. **Update CSP**: The current CSP allows `'unsafe-inline'` for scripts. Consider removing by refactoring inline scripts to external files
 
 ---
 
-## ✅ Completed Items
-
-The following improvements have been implemented:
-
-1. ~~**Remove jQuery dependency**~~ ✅ COMPLETED - Migrated to vanilla JavaScript (`custom.modern.js`)
-2. ~~**Replace ScrollReveal with native IntersectionObserver**~~ ✅ COMPLETED - Using native `IntersectionObserver` API in `initScrollReveal()` and `initLazySections()`
-3. ~~**Implement dark mode**~~ ✅ COMPLETED - Full dark mode support with system preference detection and manual toggle
-4. ~~**Add font-display: swap**~~ ✅ COMPLETED - Implemented in all font-face declarations
-5. ~~**Add Subresource Integrity for CSS**~~ ✅ COMPLETED - Added SRI hashes to all CSS files
-6. ~~**Regular dependency audits in CI**~~ ✅ COMPLETED - Added `npm audit --audit-level=high` to GitHub Actions
-7. ~~**Lazy load below-the-fold content**~~ ✅ COMPLETED - Using `IntersectionObserver` for lazy sections
-8. ~~**Optimize GitHub API Calls**~~ ✅ COMPLETED - 24-hour localStorage caching + historical JSON data file for data beyond 90 days
-9. ~~**Remove unused CSS (Bootstrap v3)**~~ ✅ COMPLETED - Removed bootstrap.min.css, keeping only bootstrap5.min.css
-
----
-
 ## Summary
 
-The website has a solid foundation with good performance practices (WebP images, preloading, deferred scripts, SRI, dark mode). The main remaining opportunities are:
+The website has a solid foundation with good performance practices (WebP/AVIF images, preloading, deferred scripts, SRI, dark mode, localStorage caching). The main remaining opportunities are:
 
-1. ~~**Consolidate CSS frameworks**~~ ✅ COMPLETED - Removed Bootstrap v3
-2. **Modernize build tooling** - Consider Vite for faster DX
-3. ~~**Optimize GitHub API usage**~~ ✅ COMPLETED - 24-hour caching + historical data
-4. **Add AVIF images** - Further reduce image sizes
+1. **Modernize build tooling** - Consider Vite for faster DX
+2. **Add offline support** - Service worker for PWA capabilities
+3. **Improve code quality tooling** - Pre-commit hooks, TypeScript
 
-These changes would result in faster load times, better developer experience, and a more maintainable codebase.
+These changes would result in better developer experience and a more maintainable codebase.
