@@ -10,6 +10,31 @@ const App = {
         this.initSmoothScroll();
         this.initScrollToTop();
         this.initDarkMode();
+        this.initLazySections();
+    },
+
+    initLazySections() {
+        const lazySections = document.querySelectorAll('.lazy-section');
+        if (!lazySections.length) return;
+
+        if ('IntersectionObserver' in window) {
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+
+            lazySections.forEach(section => sectionObserver.observe(section));
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            lazySections.forEach(section => section.classList.add('is-visible'));
+        }
     },
 
     initNav() {

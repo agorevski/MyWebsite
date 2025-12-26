@@ -60,12 +60,7 @@
             #home .menu .logo-flat{height:200px;margin-top:-14px;background:#06a763}
             #home .menu .logo-flat img{width:100%;padding:30px 44px 44px 44px}
             #home .menu a{margin-left:30px;margin-right:30px;color:#616161;display:block;font-size:12px;font-weight:700;line-height:40px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
-            #home #menuToggle{position:absolute;top:20px;right:-65px;z-index:11;display:block;text-align:center;font-size:14px;width:40px;height:40px;line-height:40px;cursor:pointer;border:1px solid rgba(93,92,92,.52);background:rgba(0,0,0,.06);transition:all .5s ease-in-out}
-            #home #menuToggle .toggle-normal{font-size:31px}
-            #home #menuToggle .toggle-normal i{font-size:31px;padding:4px;color:#1976d2}
-            #home #menuToggle .toggle-normal .top-bar{position:absolute;right:0;top:-6px;transition:.8s}
-            #home #menuToggle .toggle-normal .middle-bar{position:absolute;right:0;top:0;opacity:1;transition:.8s}
-            #home #menuToggle .toggle-normal .bottom-bar{position:absolute;right:0;top:6px;transform:rotate(0);transition:.8s}
+
             
             /* Critical Header Background */
             #home .header-background{position:relative;display:block;width:100%;height:370px;background:url(Content/images/backgrounds/background-small.webp) no-repeat;background-size:cover;background-position:center center;background-attachment:fixed}
@@ -91,6 +86,10 @@
             img{border:0;vertical-align:middle}
             .img-responsive{display:block;max-width:100%;height:auto}
             picture{display:contents}
+            
+            /* Lazy loading sections */
+            .lazy-section{opacity:0;transform:translateY(20px);transition:opacity .6s ease-out,transform .6s ease-out}
+            .lazy-section.is-visible{opacity:1;transform:translateY(0)}
         </style>
         
         <!-- Bootstrap 5 CSS -->
@@ -133,13 +132,7 @@
             <a href="#interest"><i class="title-icon fa fa-heart"></i>Interests</a>
             <a href="#contact"><i class="title-icon fa fa-envelope"></i>Contact</a>
         </div>
-        <button id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu-options">
-            <div class="toggle-normal">
-                <i class="material-icons top-bar" aria-hidden="true">remove</i>
-                <i class="material-icons middle-bar" aria-hidden="true">remove</i>
-                <i class="material-icons bottom-bar" aria-hidden="true">remove</i>
-            </div>
-        </button>
+
     </nav>
     <div class="header-background section">
         <picture>
@@ -230,11 +223,11 @@
         </div>
     </div>
 </div>
-
+<!-- ALL CONTENT BELOW THIS LINE IS BELOW THE FOLD -->
 <!--==========================================
                    EDUCATION
 ===========================================-->
-<section id="education" class="section">
+<section id="education" class="section lazy-section">
     <div class="container">
         <!-- SECTION TITLE -->
         <div class="section-title">
@@ -285,7 +278,7 @@
 <!--==========================================
                    EXPERIENCE
 ===========================================-->
-<section id="experience" class="section">
+<section id="experience" class="section lazy-section">
     <div class="container">
         <div class="section-title">
             <h4 class="text-uppercase text-center">
@@ -391,7 +384,7 @@
 <!--==========================================
                PUBLICATIONS & PATENTS
 ===========================================-->
-<section id="publications" class="section">
+<section id="publications" class="section lazy-section">
     <div class="container">
         <div class="section-title">
             <h4 class="text-uppercase text-center">
@@ -491,7 +484,7 @@
 <!--==========================================
                    INTERESTS
 ===========================================-->
-<section id="interest" class="section">
+<section id="interest" class="section lazy-section">
     <div class="container">
         <div class="section-title">
             <h4 class="text-uppercase text-center">
@@ -548,7 +541,7 @@
 <!--==========================================
                   CONTACT
 ===========================================-->
-<section id="contact" class="section">
+<section id="contact" class="section lazy-section">
     <div class="container">
         <div class="section-title">
             <h4 class="text-uppercase text-center">
@@ -599,7 +592,7 @@
     <script src="Content/javascript/vendors/bootstrap5.bundle.min.js" defer integrity="sha384-69YWf9q2FkpNf+nfR2BxBDldK6UFQQR8IANHmf50qHpjO7Ae/cidJqF9E4nFZ3GJ" crossorigin="anonymous"></script>
     <script src="Content/javascript/vendors/materialize.min.js" defer integrity="sha384-RFQshd31L1zlYtvyIsAniUCaqn0dglOmH/4dZxZ5oRJCwIm1YssT5Vvyn4DrZxos" crossorigin="anonymous"></script>
     <script src="Content/javascript/vendors/scrollreveal.min.js" defer integrity="sha384-gWTWfhWvLKbXCTDOD6n4bsHjkc9ZpyAdivg54Iy1w+k/yFa/3DkIWg8CEtiRErb6" crossorigin="anonymous"></script>
-    <script src="Content/javascript/custom.modern.js" defer integrity="sha384-ERswlG7kWbsInZipSE2Mv2Nao4Nnmh48bNf3mp+2iZFTTBHW++94tLMgsnNvgNTN" crossorigin="anonymous"></script>
+    <script src="Content/javascript/custom.modern.js" defer integrity="sha384-hMJBfflTIoC+zCUMp9fMcs4TyOiJvDf4NHJ20HMSEU++Y33CEigL4qo4Bplb8SWU" crossorigin="anonymous"></script>
     <script>
         // Calculate years of experience from start date
         (function() {
