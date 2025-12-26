@@ -118,7 +118,6 @@ function buildJavaScript() {
     
     const jsDistDir = path.join(config.distDir, 'javascript');
     const vendorsDistDir = path.join(jsDistDir, 'vendors');
-    const jsContentDir = path.join(config.contentDir, 'javascript');
     ensureDir(jsDistDir);
     ensureDir(vendorsDistDir);
     

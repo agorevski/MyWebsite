@@ -61,7 +61,7 @@ MyWebsite/
 │   │   └── backgrounds/      # Responsive background images
 │   │
 │   ├── docs/                 # Downloadable documents
-│   │   └── Alex_Gorevski_Resume_2017.pdf
+│   │   └── Alex_Gorevski_Resume_2025.pdf
 │   │
 │   └── toggle/               # Toggle components
 │

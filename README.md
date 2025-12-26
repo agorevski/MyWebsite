@@ -28,4 +28,4 @@ HTML5 • CSS3 • JavaScript • Bootstrap 5 • jQuery • PostCSS • esbuild
 
 ## License
 
-© Alex Gorevski 2017-2025. All rights reserved.
+© Alex Gorevski 2008-2025. All rights reserved.
