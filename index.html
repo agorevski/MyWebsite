@@ -362,9 +362,29 @@
                 Publications & Patents
             </h4>
         </div>
+        <style>
+            /* Publications responsive styles */
+            @media (max-width: 767px) {
+                #publications-card .publications-table { display: none; }
+                #publications-card .publications-mobile { display: block; }
+            }
+            @media (min-width: 768px) {
+                #publications-card .publications-table { display: table; }
+                #publications-card .publications-mobile { display: none; }
+            }
+            .pub-card { border-left: 4px solid #1976d2; padding: 15px; margin-bottom: 15px; background: var(--card-bg, #fff); }
+            .pub-card:last-child { margin-bottom: 0; }
+            .pub-type { display: inline-block; background: #1976d2; color: #fff; padding: 2px 8px; border-radius: 3px; font-size: 0.75em; text-transform: uppercase; margin-bottom: 8px; }
+            .pub-type.patent { background: #6a1b9a; }
+            .pub-title { font-weight: bold; font-size: 1em; margin-bottom: 8px; color: var(--heading-color, rgba(0,0,0,.87)); }
+            .pub-details { font-size: 0.9em; color: var(--text-color, #616161); margin-bottom: 8px; }
+            .pub-products { font-size: 0.85em; color: var(--text-color, #757575); border-top: 1px solid var(--border-color, #eee); padding-top: 8px; }
+            .pub-products strong { color: var(--heading-color, rgba(0,0,0,.87)); }
+        </style>
         <div id="publications-card" class="card">
             <div class="card-content">
-                <table class="table" style="width: 100%; border-collapse: collapse;">
+                <!-- Desktop table view -->
+                <table class="table publications-table" style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
                             <th style="text-align: left; padding: 10px; border-bottom: 2px solid #ddd; width: 5%;">Type</th>
@@ -448,6 +468,45 @@
                         </tr>
                     </tbody>
                 </table>
+                <!-- Mobile card view -->
+                <div class="publications-mobile">
+                    <div class="pub-card">
+                        <span class="pub-type">Publication</span>
+                        <div class="pub-title">InvisMark: Invisible and Robust Watermarking for AI-generated Image Provenance</div>
+                        <div class="pub-details"><a href="https://arxiv.org/abs/2411.07795" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>arXiv 2411.07795</strong></a>, Co-author (2024). Invisible, tamper-resistant watermarking for AI images; preserves quality (PSNR ≈ 51, SSIM ≈ 0.998) and robustly decodes UUIDs with >97% accuracy.</div>
+                        <div class="pub-products"><strong>Products:</strong> Bing Image Creator, Microsoft Designer, Microsoft Copilot, AOAI Image Models (DALLE 3, GPT-Image-1, Sora)</div>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-type patent">Patent</span>
+                        <div class="pub-title">Knowledge-Driven Pre-Trained Form Key Mapping</div>
+                        <div class="pub-details"><a href="https://patents.google.com/patent/US12423949B2" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US12423949B2</strong></a> (2025). Automatically maps form fields to standardized keys using a language model, improving accuracy and scalability in document processing.</div>
+                        <div class="pub-products"><strong>Products:</strong> Microsoft Form Recognizer</div>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-type patent">Patent</span>
+                        <div class="pub-title">Training and Applying a Key Sentence Classifier Model</div>
+                        <div class="pub-details"><a href="https://patents.google.com/patent/US20250356123A1" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US20250356123A1</strong></a> (2025). Retains only output-relevant sentences in LLMs, reducing compute and memory use while speeding responses.</div>
+                        <div class="pub-products"><strong>Products:</strong> Internal Model Training</div>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-type patent">Patent</span>
+                        <div class="pub-title">Customer-Driven Responsible AI Model Update Framework</div>
+                        <div class="pub-details">Filed 2025. Uses customer dissatisfaction reports to generate targeted training data for faster, cheaper, and more accurate AI model updates.</div>
+                        <div class="pub-products"><strong>Products:</strong> All Microsoft AI Products</div>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-type patent">Patent</span>
+                        <div class="pub-title">User-Defined Topic Classification and Moderation</div>
+                        <div class="pub-details">Filed 2025. No-code system for custom topic classification with pruned LLMs; enables scalable, real-time filtering with minimal data.</div>
+                        <div class="pub-products"><strong>Products:</strong> Azure AI Content Safety</div>
+                    </div>
+                    <div class="pub-card">
+                        <span class="pub-type patent">Patent</span>
+                        <div class="pub-title">Intellectual Property Risk Detection in Code Snippets – Evaluation and Iteration</div>
+                        <div class="pub-details">Filed 2025. Detects IP risks in AI-generated code using snippet fingerprinting and adaptive filtering, reducing false positives and improving safety.</div>
+                        <div class="pub-products"><strong>Products:</strong> GitHub Copilot</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
