@@ -8,6 +8,7 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
+  "ignorePatterns": ["*.min.js", "vendors/**"],
   "globals": {
     "ScrollReveal": "readonly",
     "Materialize": "readonly"

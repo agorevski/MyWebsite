@@ -27,11 +27,13 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
   - Use a serverless function to aggregate data server-side
   - Consider using GitHub's GraphQL API for a single request
 - **Impact**: Faster loading, reduced rate limiting risk
+- ✅ **COMPLETED**: Implemented 24-hour localStorage caching and historical JSON data file (`data/github-contributions.json`) with merge support
 
 ### 2. Font Subsetting
 - **Current**: Self-hosted fonts with preload and `font-display: swap` ✅
 - **Suggestion**: Consider subsetting fonts to only used characters
 - **Impact**: Smaller font files
+- ℹ️ **Optimized**: Fonts already use unicode-range subsetting in @font-face declarations
 
 ### 3. Remove Unused CSS
 - **Current**: PurgeCSS configured but loading both Bootstrap AND Materialize CSS
@@ -40,6 +42,7 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
   - Remove bootstrap.min.css (keeping only bootstrap5.min.css)
   - Consider Tailwind CSS for utility-first approach with automatic tree-shaking
 - **Impact**: Significantly smaller CSS bundle
+- ✅ **COMPLETED**: Removed bootstrap.min.css (old Bootstrap v3), keeping only bootstrap5.min.css
 
 ---
 
@@ -132,12 +135,12 @@ A comprehensive analysis of `index.html` and the build system with recommendatio
 
 ## 📊 Quick Wins (Low Effort, High Impact)
 
-| Priority | Suggestion | Effort | Impact |
-|----------|------------|--------|--------|
-| 1 | Choose one CSS framework | Low | High |
-| 2 | Cache GitHub API responses in localStorage | Low | Medium |
-| 3 | Add pre-commit hooks | Low | Medium |
-| 4 | Migrate to Vite | Medium | High |
+| Priority | Suggestion | Effort | Impact | Status |
+|----------|------------|--------|--------|--------|
+| 1 | Choose one CSS framework | Low | High | ✅ Done |
+| 2 | Cache GitHub API responses in localStorage | Low | Medium | ✅ Done |
+| 3 | Add pre-commit hooks | Low | Medium | |
+| 4 | Migrate to Vite | Medium | High | |
 
 ---
 
@@ -166,6 +169,8 @@ The following improvements have been implemented:
 5. ~~**Add Subresource Integrity for CSS**~~ ✅ COMPLETED - Added SRI hashes to all CSS files
 6. ~~**Regular dependency audits in CI**~~ ✅ COMPLETED - Added `npm audit --audit-level=high` to GitHub Actions
 7. ~~**Lazy load below-the-fold content**~~ ✅ COMPLETED - Using `IntersectionObserver` for lazy sections
+8. ~~**Optimize GitHub API Calls**~~ ✅ COMPLETED - 24-hour localStorage caching + historical JSON data file for data beyond 90 days
+9. ~~**Remove unused CSS (Bootstrap v3)**~~ ✅ COMPLETED - Removed bootstrap.min.css, keeping only bootstrap5.min.css
 
 ---
 
@@ -173,9 +178,9 @@ The following improvements have been implemented:
 
 The website has a solid foundation with good performance practices (WebP images, preloading, deferred scripts, SRI, dark mode). The main remaining opportunities are:
 
-1. **Consolidate CSS frameworks** - Remove Bootstrap/Materialize overlap
+1. ~~**Consolidate CSS frameworks**~~ ✅ COMPLETED - Removed Bootstrap v3
 2. **Modernize build tooling** - Consider Vite for faster DX
-3. **Optimize GitHub API usage** - Cache and reduce calls
+3. ~~**Optimize GitHub API usage**~~ ✅ COMPLETED - 24-hour caching + historical data
 4. **Add AVIF images** - Further reduce image sizes
 
 These changes would result in faster load times, better developer experience, and a more maintainable codebase.

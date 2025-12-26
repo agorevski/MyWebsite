@@ -5,7 +5,7 @@
   "author": "Alexander Gorevski",
   "license": "MIT",
   "scripts": {
-    "build": "npm run clean && npm run optimize:images && npm run generate:avif && npm run extract:fontawesome && npm run build:css && npm run build:js && npm run bundle:assets && npm run critical:generate && npm run critical:apply && npm run update:sri",
+    "build": "npm run clean && npm run update:github && npm run optimize:images && npm run generate:avif && npm run extract:fontawesome && npm run build:css && npm run build:js && npm run bundle:assets && npm run critical:generate && npm run critical:apply && npm run update:sri",
     "clean": "rimraf dist",
     "optimize:images": "imagemin Images/**/*.{jpg,png,gif} --out-dir=dist/Images",
     "generate:avif": "node scripts/generate-avif.js",
@@ -17,12 +17,13 @@
     "critical:generate": "node scripts/extract-critical-css.mjs generate",
     "critical:apply": "node scripts/extract-critical-css.mjs apply",
     "lint": "npm-run-all lint:*",
-    "lint:css": "stylelint \"Content/stylesheets/**/*.css\"",
+    "lint:css": "stylelint \"Content/stylesheets/**/*.css\" --allow-empty-input",
     "lint:js": "eslint \"Content/javascript/**/*.js\"",
     "lint:fix": "npm-run-all lint:*:fix",
     "lint:css:fix": "stylelint \"Content/stylesheets/**/*.css\" --fix",
     "lint:js:fix": "eslint \"Content/javascript/**/*.js\" --fix",
-    "serve": "http-server . -p 8080 -o"
+    "serve": "http-server . -p 8080 -o",
+    "update:github": "node scripts/update-github-contributions.js"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",

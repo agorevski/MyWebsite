@@ -1,5 +1,6 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": ["**/*.min.css", "**/vendors/**", "**/generated-*.css"],
   "rules": {
     "no-descending-specificity": null,
     "selector-class-pattern": null,

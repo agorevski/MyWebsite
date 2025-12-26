@@ -722,10 +722,13 @@
             document.getElementById('years-experience').textContent = displayText;
         })();
 
-        // GitHub Contributions Graph (last 90 days)
+        // GitHub Contributions Graph with 24-hour caching and historical data support
         (function() {
             const username = 'agorevski';
             const daysToShow = 90;
+            const CACHE_KEY = 'github_contributions_cache';
+            const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+            const HISTORICAL_DATA_URL = 'data/github-contributions.json';
             
             function getContributionColor(count) {
                 if (count === 0) return 'rgba(0,0,0,0.15)';
@@ -744,19 +747,81 @@
                 return months[month];
             }
             
+            // Check if cache is valid (not expired)
+            function getCachedData() {
+                try {
+                    const cached = localStorage.getItem(CACHE_KEY);
+                    if (!cached) return null;
+                    
+                    const { timestamp, data } = JSON.parse(cached);
+                    const now = Date.now();
+                    
+                    if (now - timestamp < CACHE_DURATION_MS) {
+                        console.log('Using cached GitHub data (expires in ' + Math.round((CACHE_DURATION_MS - (now - timestamp)) / 3600000) + 'h)');
+                        return data;
+                    }
+                    console.log('Cache expired, fetching fresh data');
+                    return null;
+                } catch (e) {
+                    console.warn('Error reading cache:', e);
+                    return null;
+                }
+            }
+            
+            // Save data to cache
+            function setCachedData(data) {
+                try {
+                    const cacheEntry = {
+                        timestamp: Date.now(),
+                        data: data
+                    };
+                    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheEntry));
+                } catch (e) {
+                    console.warn('Error saving to cache:', e);
+                }
+            }
+            
+            // Fetch historical data from local JSON file
+            async function fetchHistoricalData() {
+                try {
+                    const response = await fetch(HISTORICAL_DATA_URL);
+                    if (!response.ok) return {};
+                    const data = await response.json();
+                    return data.contributions || {};
+                } catch (e) {
+                    console.log('No historical data available');
+                    return {};
+                }
+            }
+            
+            // Merge contributions, taking the max value for each date
+            function mergeContributions(base, overlay) {
+                const merged = { ...base };
+                for (const [date, count] of Object.entries(overlay)) {
+                    merged[date] = Math.max(merged[date] || 0, count);
+                }
+                return merged;
+            }
+            
             async function fetchContributions() {
                 const endDate = new Date();
-                // Calculate start date as exactly 90 days ago, aligned to Sunday
                 const startDate = new Date();
                 startDate.setDate(startDate.getDate() - daysToShow);
-                // Align to the start of the week (Sunday)
                 startDate.setDate(startDate.getDate() - startDate.getDay());
                 
+                // Check cache first
+                const cachedData = getCachedData();
+                if (cachedData) {
+                    renderGraph(cachedData.contributions, new Date(cachedData.startDate), new Date(cachedData.endDate), cachedData.total);
+                    return;
+                }
+                
                 try {
-                    // Fetch both events and commits from repositories for complete data
-                    const [events, repoCommits] = await Promise.all([
+                    // Fetch GitHub API data, historical JSON data in parallel
+                    const [events, repoCommits, historicalData] = await Promise.all([
                         getRecentGitHubEvents(username, startDate),
-                        getRecentCommitsFromRepos(username, startDate)
+                        getRecentCommitsFromRepos(username, startDate),
+                        fetchHistoricalData()
                     ]);
                     
                     const contributions = {};
@@ -773,7 +838,6 @@
                     events.forEach(event => {
                         const eventDate = formatDate(new Date(event.created_at));
                         if (contributions.hasOwnProperty(eventDate)) {
-                            // Count different event types as contributions
                             if (event.type === 'PushEvent') {
                                 contributions[eventDate] += event.payload?.commits?.length || 1;
                             } else if (['PullRequestEvent', 'IssuesEvent', 'CreateEvent', 'PullRequestReviewEvent'].includes(event.type)) {
@@ -782,17 +846,38 @@
                         }
                     });
                     
-                    // Add commits from repositories (deduplicated by date)
+                    // Add commits from repositories
                     repoCommits.forEach(commitDate => {
                         if (contributions.hasOwnProperty(commitDate)) {
                             contributions[commitDate] += 1;
                         }
                     });
                     
-                    // Calculate total for our date range
-                    Object.values(contributions).forEach(count => totalContributions += count);
+                    // Merge with historical data (historical takes precedence for older data)
+                    const mergedContributions = mergeContributions(contributions, historicalData);
                     
-                    renderGraph(contributions, startDate, endDate, totalContributions);
+                    // Filter to only show dates in our display range
+                    const displayContributions = {};
+                    const displayCurrent = new Date(startDate);
+                    while (displayCurrent <= endDate) {
+                        const dateStr = formatDate(displayCurrent);
+                        displayContributions[dateStr] = mergedContributions[dateStr] || 0;
+                        displayCurrent.setDate(displayCurrent.getDate() + 1);
+                    }
+                    
+                    // Calculate total for our date range
+                    Object.values(displayContributions).forEach(count => totalContributions += count);
+                    
+                    // Cache the results
+                    setCachedData({
+                        contributions: displayContributions,
+                        startDate: startDate.toISOString(),
+                        endDate: endDate.toISOString(),
+                        total: totalContributions,
+                        mergedHistorical: mergedContributions
+                    });
+                    
+                    renderGraph(displayContributions, startDate, endDate, totalContributions);
                 } catch (error) {
                     console.error('Failed to fetch GitHub contributions:', error);
                     document.getElementById('contributions-loading').textContent = 'Unable to load contributions';
@@ -810,11 +895,9 @@
                         const data = await response.json();
                         if (!Array.isArray(data) || data.length === 0) break;
                         
-                        // Filter events within our date range
                         const recent = data.filter(event => new Date(event.created_at) >= since);
                         events = events.concat(recent);
                         
-                        // Stop if older events appear (we've gone past our date range)
                         if (recent.length < data.length) break;
                         page++;
                     } catch (e) {
@@ -830,13 +913,11 @@
                 const sinceISO = since.toISOString();
                 
                 try {
-                    // Get user's public repositories
                     const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`);
                     if (!reposResponse.ok) return commits;
                     const repos = await reposResponse.json();
                     if (!Array.isArray(repos)) return commits;
                     
-                    // Fetch commits from recently pushed repos (limit to avoid rate limiting)
                     const recentRepos = repos.filter(repo => new Date(repo.pushed_at) >= since).slice(0, 10);
                     
                     await Promise.all(recentRepos.map(async repo => {
@@ -920,7 +1001,6 @@
                     const weekColumn = document.createElement('div');
                     weekColumn.style.cssText = 'display: flex; flex-direction: column; gap: 1px;';
                     
-                    // Fill empty cells for first week
                     if (week === weeks[0]) {
                         for (let i = 0; i < week[0].dayOfWeek; i++) {
                             const emptyCell = document.createElement('div');
