@@ -11,13 +11,19 @@ const crypto = require('crypto');
 // Configuration
 const config = {
     htmlFile: path.join(__dirname, '..', 'index.html'),
-    // Files to generate SRI hashes for (relative to project root)
+    // JS files to generate SRI hashes for (relative to project root)
     // Note: jQuery removed - using vanilla JS in custom.modern.js
-    files: [
+    jsFiles: [
         'Content/javascript/custom.modern.js',
         'Content/javascript/vendors/bootstrap5.bundle.min.js',
         'Content/javascript/vendors/materialize.min.js',
         'Content/javascript/vendors/scrollreveal.min.js'
+    ],
+    // CSS files to generate SRI hashes for (relative to project root)
+    cssFiles: [
+        'Content/stylesheets/vendors/bootstrap5.min.css',
+        'Content/stylesheets/async-noncritical.min.css',
+        'Content/stylesheets/critical.min.css'
     ]
 };
 
@@ -40,13 +46,13 @@ function calculateSRI(filePath) {
 }
 
 /**
- * Update SRI hash in HTML content
+ * Update SRI hash in HTML content for script tags
  * @param {string} html - HTML content
  * @param {string} filePath - Path to the file (used to find the script tag)
  * @param {string} newHash - New SRI hash
  * @returns {string} Updated HTML content
  */
-function updateSRIInHTML(html, filePath, newHash) {
+function updateScriptSRIInHTML(html, filePath, newHash) {
     // Escape special regex characters in file path
     const escapedPath = filePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     
@@ -69,6 +75,35 @@ function updateSRIInHTML(html, filePath, newHash) {
 }
 
 /**
+ * Update SRI hash in HTML content for link tags (CSS)
+ * @param {string} html - HTML content
+ * @param {string} filePath - Path to the file (used to find the link tag)
+ * @param {string} newHash - New SRI hash
+ * @returns {string} Updated HTML content
+ */
+function updateLinkSRIInHTML(html, filePath, newHash) {
+    // Escape special regex characters in file path
+    const escapedPath = filePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    
+    // Match link tags with this href and an integrity attribute
+    const linkRegex = new RegExp(
+        `(<link[^>]*href=["']${escapedPath}["'][^>]*integrity=["'])([^"']+)(["'][^>]*>)`,
+        'g'
+    );
+    
+    // Also match if integrity comes before href
+    const linkRegexAlt = new RegExp(
+        `(<link[^>]*integrity=["'])([^"']+)(["'][^>]*href=["']${escapedPath}["'][^>]*>)`,
+        'g'
+    );
+    
+    let updated = html.replace(linkRegex, `$1${newHash}$3`);
+    updated = updated.replace(linkRegexAlt, `$1${newHash}$3`);
+    
+    return updated;
+}
+
+/**
  * Main function
  */
 function main() {
@@ -83,13 +118,39 @@ function main() {
     let html = fs.readFileSync(config.htmlFile, 'utf8');
     let updatedCount = 0;
     
-    // Process each file
-    for (const filePath of config.files) {
+    // Process JS files
+    console.log('📜 Processing JavaScript files...\n');
+    for (const filePath of config.jsFiles) {
         const hash = calculateSRI(filePath);
         
         if (hash) {
             const originalHTML = html;
-            html = updateSRIInHTML(html, filePath, hash);
+            html = updateScriptSRIInHTML(html, filePath, hash);
+            
+            if (html !== originalHTML) {
+                console.log(`✅ Updated: ${filePath}`);
+                console.log(`   Hash: ${hash}\n`);
+                updatedCount++;
+            } else {
+                // Check if the file is referenced in HTML
+                if (html.includes(filePath)) {
+                    console.log(`ℹ️  No change: ${filePath}`);
+                    console.log(`   Hash: ${hash}\n`);
+                } else {
+                    console.log(`⚠️  Not found in HTML: ${filePath}\n`);
+                }
+            }
+        }
+    }
+    
+    // Process CSS files
+    console.log('🎨 Processing CSS files...\n');
+    for (const filePath of config.cssFiles) {
+        const hash = calculateSRI(filePath);
+        
+        if (hash) {
+            const originalHTML = html;
+            html = updateLinkSRIInHTML(html, filePath, hash);
             
             if (html !== originalHTML) {
                 console.log(`✅ Updated: ${filePath}`);
