@@ -69,7 +69,7 @@
             
             /* Critical V-Card Styles */
             #v-card-holder{overflow:visible;width:100%;height:auto;margin-top:-194px}
-            #v-card-holder #v-card{position:relative;width:100%;height:400px;overflow:hidden;z-index:1;background:#06a763;margin:-33px 3px 0 0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:2px}
+            #v-card-holder #v-card{position:relative;width:100%;min-height:400px!important;height:auto!important;overflow:visible!important;z-index:1;background:#06a763;margin:-33px 3px 0 0;box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);border-radius:2px}
             #v-card-holder #v-card #profile{position:absolute;right:0;z-index:1}
             #v-card-holder #v-card #profile img{width:400px;height:auto}
             #v-card-holder #v-card #profile .slant{top:0;z-index:1;position:absolute;border-style:solid;border-width:400px 0 0 100px;border-color:rgba(223,50,50,0) transparent transparent #06a763}
@@ -149,16 +149,8 @@
                         <div class="infos">
                             <ul class="profile-list">
                                 <li class="clearfix">
-                                    <span class="title"><i class="material-icons">email</i></span>
-                                    <span class="content">admin@alexgorevski.com</span>
-                                </li>
-                                <li class="clearfix">
-                                    <span class="title"><i class="material-icons">language</i></span>
-                                    <span class="content">www.alexgorevski.com</span>
-                                </li>
-                                <li class="clearfix">
                                     <span class="title"><i class="material-icons">place</i></span>
-                                    <span class="content">Seattle, WA 98144</span>
+                                    <span class="content">Seattle, WA</span>
                                 </li>
                             </ul>
                         </div>
@@ -166,6 +158,53 @@
                             <a href="https://www.facebook.com/ofepicproportions/" id="first_one" class="social btn-floating indigo"><i class="fa fa-facebook"></i><span class="sr-only">Visit Facebook profile</span></a>
                             <a href="https://www.linkedin.com/in/alexgorevski/" class="social btn-floating blue darken-3"><i class="fa fa-linkedin"></i><span class="sr-only">Visit LinkedIn profile</span></a>
                             <a href="https://github.com/agorevski/" class="social  btn-floating purple darken-3"><i class="fa fa-github-alt"></i><span class="sr-only">Visit GitHub profile</span></a>
+                        </div>
+                        <div id="contributions-graph" style="overflow-x: auto; margin-top: 15px; max-width: 515px;">
+                            <style>
+                                @media (max-width: 767px) {
+                                    #contributions-graph {
+                                        display: flex !important;
+                                        flex-direction: column !important;
+                                        align-items: center !important;
+                                        max-width: 100% !important;
+                                    }
+                                    #contributions-graph > div {
+                                        align-items: center !important;
+                                    }
+                                    #contributions-graph p {
+                                        text-align: center !important;
+                                    }
+                                }
+                            </style>
+                            <div style="display: flex; flex-direction: column; gap: 3px; min-width: fit-content;">
+                                <div style="display: flex; gap: 2px; margin-bottom: 2px;">
+                                    <div style="width: 20px;"></div>
+                                    <div id="month-labels" style="display: flex; gap: 2px; font-size: 9px; color: rgba(255,255,255,0.7);"></div>
+                                </div>
+                                <div style="display: flex; gap: 2px;">
+                                    <div id="day-labels" style="display: flex; flex-direction: column; gap: 1px; font-size: 8px; color: rgba(255,255,255,0.7); width: 20px;">
+                                        <span style="height: 8px;"></span>
+                                        <span style="height: 8px;">Mon</span>
+                                        <span style="height: 8px;"></span>
+                                        <span style="height: 8px;">Wed</span>
+                                        <span style="height: 8px;"></span>
+                                        <span style="height: 8px;">Fri</span>
+                                        <span style="height: 8px;"></span>
+                                    </div>
+                                    <div id="contributions-grid" style="display: flex; gap: 1px;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: flex-start; align-items: center; gap: 4px; margin-top: 6px; font-size: 9px; color: rgba(255,255,255,0.7);">
+                                    <span>Less</span>
+                                    <div style="width: 8px; height: 8px; background-color: rgba(0,0,0,0.15); border-radius: 2px;"></div>
+                                    <div style="width: 8px; height: 8px; background-color: #fef3c7; border-radius: 2px;"></div>
+                                    <div style="width: 8px; height: 8px; background-color: #fcd34d; border-radius: 2px;"></div>
+                                    <div style="width: 8px; height: 8px; background-color: #f59e0b; border-radius: 2px;"></div>
+                                    <div style="width: 8px; height: 8px; background-color: #d97706; border-radius: 2px;"></div>
+                                    <span>More</span>
+                                </div>
+                            </div>
+                            <p id="contributions-loading" style="text-align: left; color: rgba(255,255,255,0.7); font-size: 10px; margin: 6px 0 0 0;">Loading contributions...</p>
+                            <p id="contributions-total" style="text-align: left; color: rgba(255,255,255,0.7); font-size: 10px; margin: 6px 0 0 0; display: none;"></p>
                         </div>
                     </div>
                 </div>
@@ -187,12 +226,12 @@
                             My expertise spans distributed systems, big-data platforms, and high-reliability infrastructure.
                             Recently, I've focused on applied AI—integrating models into real products, optimizing performance, and enabling teams to ship fast with confidence.
                             I'm drawn to roles where deep systems engineering and modern AI innovation meet to drive outsized impact.
-                                                </p>
+                        </p>
                     </div>
                     <div id="about-btn" class="card-action">
                         <div class="about-btn">
                             <a href="Content/docs/Alex_Gorevski_Resume_2025.pdf" class="btn waves-effect">Download Resume</a>
-                            <a href="#contact" class="btn waves-effect">Contact Me</a>
+                            <a href="mailto:admin@alexgorevski.com" class="btn waves-effect">Contact Me</a>
                         </div>
                     </div>
                 </div>
@@ -294,7 +333,7 @@
             </div>
 
             <div class="timeline-block">
-                <div class="timeline-dot"><i class="fa fa-money-bill"></i></div>
+                <div class="timeline-dot"><i class="fa fa-dollar-sign"></i></div>
                 <div class="card timeline-content">
                     <div class="card-content">
                         <h6 class="timeline-title">Paychex</h6>
@@ -569,36 +608,6 @@
     </div>
 </section>
 
-<!--==========================================
-                  CONTACT
-===========================================-->
-<section id="contact" class="section lazy-section">
-    <div class="container">
-        <div class="section-title">
-            <h4 class="text-uppercase text-center">
-                <picture>
-                    <source srcset="Images/icons/envelope.webp" type="image/webp">
-                    <img src="Images/icons/envelope.png" alt="" loading="lazy" width="66" height="66" decoding="async" aria-hidden="true">
-                </picture>
-                Contact
-            </h4>
-        </div>
-        <div class="row">
-            <div id="contact-card" class="col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="card-content text-center">
-                        <p>Get in touch via email or connect with me on social media.</p>
-                        <p><a href="mailto:admin@alexgorevski.com" class="btn waves-effect"><i class="fa fa-envelope"></i> Email Me</a></p>
-                        <div class="social-links" style="margin-top: 20px;">
-                            <a href="https://www.linkedin.com/in/alexgorevski/" class="btn-floating blue darken-3"><i class="fa fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
-                            <a href="https://github.com/agorevski/" class="btn-floating purple darken-3"><i class="fa fa-github-alt"></i><span class="sr-only">GitHub</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 </main>
 
 <!--==========================================
@@ -634,6 +643,237 @@
             var decimalPart = exactYears - floorYears;
             var displayText = decimalPart >= 0.5 ? '~' + Math.ceil(exactYears) : floorYears;
             document.getElementById('years-experience').textContent = displayText;
+        })();
+
+        // GitHub Contributions Graph (last 90 days)
+        (function() {
+            const username = 'agorevski';
+            const daysToShow = 90;
+            
+            function getContributionColor(count) {
+                if (count === 0) return 'rgba(0,0,0,0.15)';
+                if (count <= 3) return '#fef3c7';
+                if (count <= 6) return '#fcd34d';
+                if (count <= 9) return '#f59e0b';
+                return '#d97706';
+            }
+            
+            function formatDate(date) {
+                return date.toISOString().split('T')[0];
+            }
+            
+            function getMonthName(month) {
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return months[month];
+            }
+            
+            async function fetchContributions() {
+                const endDate = new Date();
+                // Calculate start date as exactly 90 days ago, aligned to Sunday
+                const startDate = new Date();
+                startDate.setDate(startDate.getDate() - daysToShow);
+                // Align to the start of the week (Sunday)
+                startDate.setDate(startDate.getDate() - startDate.getDay());
+                
+                try {
+                    // Fetch both events and commits from repositories for complete data
+                    const [events, repoCommits] = await Promise.all([
+                        getRecentGitHubEvents(username, startDate),
+                        getRecentCommitsFromRepos(username, startDate)
+                    ]);
+                    
+                    const contributions = {};
+                    let totalContributions = 0;
+                    
+                    // Initialize all dates in our range with 0
+                    const current = new Date(startDate);
+                    while (current <= endDate) {
+                        contributions[formatDate(current)] = 0;
+                        current.setDate(current.getDate() + 1);
+                    }
+                    
+                    // Count contribution events by date
+                    events.forEach(event => {
+                        const eventDate = formatDate(new Date(event.created_at));
+                        if (contributions.hasOwnProperty(eventDate)) {
+                            // Count different event types as contributions
+                            if (event.type === 'PushEvent') {
+                                contributions[eventDate] += event.payload?.commits?.length || 1;
+                            } else if (['PullRequestEvent', 'IssuesEvent', 'CreateEvent', 'PullRequestReviewEvent'].includes(event.type)) {
+                                contributions[eventDate] += 1;
+                            }
+                        }
+                    });
+                    
+                    // Add commits from repositories (deduplicated by date)
+                    repoCommits.forEach(commitDate => {
+                        if (contributions.hasOwnProperty(commitDate)) {
+                            contributions[commitDate] += 1;
+                        }
+                    });
+                    
+                    // Calculate total for our date range
+                    Object.values(contributions).forEach(count => totalContributions += count);
+                    
+                    renderGraph(contributions, startDate, endDate, totalContributions);
+                } catch (error) {
+                    console.error('Failed to fetch GitHub contributions:', error);
+                    document.getElementById('contributions-loading').textContent = 'Unable to load contributions';
+                }
+            }
+            
+            async function getRecentGitHubEvents(username, since) {
+                let events = [];
+                let page = 1;
+                
+                while (page <= 10) {
+                    try {
+                        const response = await fetch(`https://api.github.com/users/${username}/events?per_page=100&page=${page}`);
+                        if (!response.ok) break;
+                        const data = await response.json();
+                        if (!Array.isArray(data) || data.length === 0) break;
+                        
+                        // Filter events within our date range
+                        const recent = data.filter(event => new Date(event.created_at) >= since);
+                        events = events.concat(recent);
+                        
+                        // Stop if older events appear (we've gone past our date range)
+                        if (recent.length < data.length) break;
+                        page++;
+                    } catch (e) {
+                        break;
+                    }
+                }
+                
+                return events;
+            }
+            
+            async function getRecentCommitsFromRepos(username, since) {
+                const commits = [];
+                const sinceISO = since.toISOString();
+                
+                try {
+                    // Get user's public repositories
+                    const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`);
+                    if (!reposResponse.ok) return commits;
+                    const repos = await reposResponse.json();
+                    if (!Array.isArray(repos)) return commits;
+                    
+                    // Fetch commits from recently pushed repos (limit to avoid rate limiting)
+                    const recentRepos = repos.filter(repo => new Date(repo.pushed_at) >= since).slice(0, 10);
+                    
+                    await Promise.all(recentRepos.map(async repo => {
+                        try {
+                            const commitsResponse = await fetch(
+                                `https://api.github.com/repos/${username}/${repo.name}/commits?author=${username}&since=${sinceISO}&per_page=100`
+                            );
+                            if (!commitsResponse.ok) return;
+                            const repoCommits = await commitsResponse.json();
+                            if (!Array.isArray(repoCommits)) return;
+                            
+                            repoCommits.forEach(commit => {
+                                if (commit.commit?.author?.date) {
+                                    commits.push(formatDate(new Date(commit.commit.author.date)));
+                                }
+                            });
+                        } catch (e) {
+                            // Skip failed repos
+                        }
+                    }));
+                } catch (e) {
+                    // Return what we have
+                }
+                
+                return commits;
+            }
+            
+            function renderGraph(contributions, startDate, endDate, total) {
+                const grid = document.getElementById('contributions-grid');
+                const monthLabels = document.getElementById('month-labels');
+                
+                grid.innerHTML = '';
+                monthLabels.innerHTML = '';
+                
+                const weeks = [];
+                let currentWeek = [];
+                const current = new Date(startDate);
+                let lastMonth = -1;
+                let weekIndex = 0;
+                
+                while (current <= endDate) {
+                    const dayOfWeek = current.getDay();
+                    
+                    if (dayOfWeek === 0 && currentWeek.length > 0) {
+                        weeks.push(currentWeek);
+                        currentWeek = [];
+                        weekIndex++;
+                    }
+                    
+                    const dateStr = formatDate(current);
+                    const count = contributions[dateStr] || 0;
+                    
+                    currentWeek.push({
+                        date: dateStr,
+                        count: count,
+                        dayOfWeek: dayOfWeek,
+                        month: current.getMonth(),
+                        isNewMonth: current.getMonth() !== lastMonth && current.getDate() <= 7
+                    });
+                    
+                    if (current.getMonth() !== lastMonth && current.getDate() <= 7) {
+                        const label = document.createElement('span');
+                        label.textContent = getMonthName(current.getMonth());
+                        label.style.cssText = `position: absolute; left: ${weekIndex * 9}px;`;
+                        monthLabels.appendChild(label);
+                    }
+                    
+                    lastMonth = current.getMonth();
+                    current.setDate(current.getDate() + 1);
+                }
+                
+                if (currentWeek.length > 0) {
+                    weeks.push(currentWeek);
+                }
+                
+                monthLabels.style.position = 'relative';
+                monthLabels.style.width = (weeks.length * 9) + 'px';
+                monthLabels.style.height = '10px';
+                
+                weeks.forEach(week => {
+                    const weekColumn = document.createElement('div');
+                    weekColumn.style.cssText = 'display: flex; flex-direction: column; gap: 1px;';
+                    
+                    // Fill empty cells for first week
+                    if (week === weeks[0]) {
+                        for (let i = 0; i < week[0].dayOfWeek; i++) {
+                            const emptyCell = document.createElement('div');
+                            emptyCell.style.cssText = 'width: 8px; height: 8px;';
+                            weekColumn.appendChild(emptyCell);
+                        }
+                    }
+                    
+                    week.forEach(day => {
+                        const cell = document.createElement('div');
+                        cell.style.cssText = `width: 8px; height: 8px; background-color: ${getContributionColor(day.count)}; border-radius: 1px; cursor: pointer;`;
+                        cell.title = `${day.count} contribution${day.count !== 1 ? 's' : ''} on ${day.date}`;
+                        weekColumn.appendChild(cell);
+                    });
+                    
+                    grid.appendChild(weekColumn);
+                });
+                
+                document.getElementById('contributions-loading').style.display = 'none';
+                const totalEl = document.getElementById('contributions-total');
+                totalEl.textContent = `${total} contributions in the last ${daysToShow} days`;
+                totalEl.style.display = 'block';
+            }
+            
+            // Fetch on load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', fetchContributions);
+            } else {
+                fetchContributions();
+            }
         })();
     </script>
 </body>
