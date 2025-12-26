@@ -12,9 +12,9 @@ const crypto = require('crypto');
 const config = {
     htmlFile: path.join(__dirname, '..', 'index.html'),
     // Files to generate SRI hashes for (relative to project root)
+    // Note: jQuery removed - using vanilla JS in custom.modern.js
     files: [
         'Content/javascript/custom.modern.js',
-        'Content/javascript/vendors/jquery-3.7.1.min.js',
         'Content/javascript/vendors/bootstrap5.bundle.min.js',
         'Content/javascript/vendors/materialize.min.js',
         'Content/javascript/vendors/scrollreveal.min.js'
