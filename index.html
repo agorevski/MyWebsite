@@ -111,29 +111,6 @@
                     HEADER
 ===========================================-->
 <header id="home">
-    <nav id="theMenu" class="menu" aria-label="Main navigation">
-        <div id="menu-options" class="menu-wrap">
-            <div class="logo-flat">
-                <picture>
-                    <source srcset="Images/profile/alex-small.webp 263w,
-                                    Images/profile/alex-medium.webp 526w,
-                                    Images/profile/alex.webp 349w"
-                            sizes="(min-width: 768px) 225px, 150px"
-                            type="image/webp">
-                    <img alt="Alex Gorevski personal logo" class="img-responsive" src="Images/profile/alex-small.png" loading="lazy" width="225" height="225">
-                </picture>
-            </div>
-            <br>
-            <a href="#home"><i class="title-icon fa fa-user"></i>Home</a>
-            <a href="#about"><i class="title-icon fa fa-dashboard"></i>About</a>
-            <a href="#education"><i class="title-icon fa fa-graduation-cap"></i>Education</a>
-            <a href="#experience"><i class="title-icon fa fa-suitcase"></i>Experience</a>
-            <a href="#publications"><i class="title-icon fa fa-certificate"></i>Publications</a>
-            <a href="#interest"><i class="title-icon fa fa-heart"></i>Interests</a>
-            <a href="#contact"><i class="title-icon fa fa-envelope"></i>Contact</a>
-        </div>
-
-    </nav>
     <div class="header-background section">
         <picture>
             <source media="(min-width: 1281px)" srcset="Content/images/backgrounds/background-large.webp" type="image/webp">
@@ -395,36 +372,82 @@
         <div id="publications-card" class="card">
             <div class="card-content">
                 <h5><i class="fa fa-scroll"></i> Publications</h5>
-                <ul class="publication-list" style="list-style: none; padding-left: 0;">
-                    <li style="margin-bottom: 15px;">
-                        <a href="https://arxiv.org/abs/2411.07795" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>InvisMark: Invisible and Robust Watermarking for AI-generated Image Provenance</strong> <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
-                        <span style="color: #616161;">arXiv: 2411.07795, 2024 – Co-author. Developed gradient-resistant watermarking.</span>
-                    </li>
-                </ul>
+                <table class="table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 2px solid #ddd; width: 45%;">Publication</th>
+                            <th style="text-align: left; padding: 10px; border-bottom: 2px solid #ddd; width: 55%;">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <a href="https://arxiv.org/abs/2411.07795" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>InvisMark: Invisible and Robust Watermarking for AI-generated Image Provenance</strong> <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
+                                <span style="color: #616161;">arXiv: 2411.07795, 2024 – Co-author</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                InvisMark is an invisible, tamper-resistant watermarking system for AI-generated images that preserves visual quality while remaining robust to compression, resizing, and distortion. It uses neural network–based encoding to embed large payloads (up to 256 bits) such as UUIDs with error correction, achieving PSNR ≈ 51, SSIM ≈ 0.998, and over 97% decoding accuracy under common image edits.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 
                 <h5 style="margin-top: 30px;"><i class="fa fa-certificate"></i> Patents</h5>
-                <ul class="patent-list" style="list-style: none; padding-left: 0;">
-                    <li style="margin-bottom: 15px;">
-                        <a href="https://patents.google.com/patent/US12423949B2" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US12423949B2</strong> – Knowledge-Driven Pre-Trained Form Key Mapping <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
-                        <span style="color: #1a237e;"><i class="fa fa-check-circle"></i> Awarded September 2025</span>
-                    </li>
-                    <li style="margin-bottom: 15px;">
-                        <a href="https://patents.google.com/patent/US20250356123A1" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US20250356123A1</strong> – Training and Applying a Key Sentence Classifier Model <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
-                        <span style="color: #1976d2;"><i class="fa fa-clock"></i> Published October 2025</span>
-                    </li>
-                    <li style="margin-bottom: 15px;">
-                        <strong>User-Defined Topic Classification and Moderation</strong><br>
-                        <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed December 2025</span>
-                    </li>
-                    <li style="margin-bottom: 15px;">
-                        <strong>Intellectual Property Risk Detection in Code Snippets – Evaluation and Iteration</strong><br>
-                        <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed December 2025</span>
-                    </li>
-                    <li style="margin-bottom: 15px;">
-                        <strong>Customer-Driven Responsible AI Model Update Framework</strong><br>
-                        <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed June 2025</span>
-                    </li>
-                </ul>
+                <table class="table" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding: 10px; border-bottom: 2px solid #ddd; width: 45%;">Patent</th>
+                            <th style="text-align: left; padding: 10px; border-bottom: 2px solid #ddd; width: 55%;">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <a href="https://patents.google.com/patent/US12423949B2" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US12423949B2</strong> – Knowledge-Driven Pre-Trained Form Key Mapping <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
+                                <span style="color: #1a237e;"><i class="fa fa-check-circle"></i> Awarded September 2025</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                This invention, used in Microsoft Form Recognizer, automatically maps extracted form fields to standardized keys across diverse documents. By aligning inconsistent field names with a trained language model, it eliminates manual rules and boosts accuracy and scalability in enterprise document processing.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <a href="https://patents.google.com/patent/US20250356123A1" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #1a237e;"><strong>US20250356123A1</strong> – Training and Applying a Key Sentence Classifier Model <i class="fa fa-external-link-alt" style="font-size: 0.8em;"></i></a><br>
+                                <span style="color: #1976d2;"><i class="fa fa-clock"></i> Published October 2025</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                This invention improves large language model efficiency by identifying and retaining only the sentences that affect outputs, reducing prompt size without sacrificing quality. This lowers compute and memory use, speeds responses, and cuts costs, enhancing throughput and latency in production LLM systems.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <strong>User-Defined Topic Classification and Moderation</strong><br>
+                                <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed December 2025</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                This invention covers a no-code system for custom topic classification and content moderation using pruned LLMs, requiring minimal data and no fine-tuning. It enables scalable, real-time filtering with high accuracy, reducing false positives and making bespoke moderation accessible and efficient for any organization.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <strong>Intellectual Property Risk Detection in Code Snippets – Evaluation and Iteration</strong><br>
+                                <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed December 2025</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                This invention, used in GitHub Copilot, detects IP risks in AI-generated code by fingerprinting snippets and comparing them to a protected code index. Adaptive filtering and telemetry analysis reduce false positives, ensuring faster, safer, and more accurate code generation.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top;">
+                                <strong>Customer-Driven Responsible AI Model Update Framework</strong><br>
+                                <span style="color: #ff9800;"><i class="fa fa-hourglass-half"></i> Filed June 2025</span>
+                            </td>
+                            <td style="padding: 15px 10px; border-bottom: 1px solid #eee; vertical-align: top; color: #616161;">
+                                This invention, used across the entire suite of Microsoft’s AI products to detect content harms, leverages customer dissatisfaction reports (DSATs) to generate targeted training data for updating responsible AI models. By rapidly retraining models on these weighted, augmented examples, it improves accuracy and responsiveness while reducing the cost and time of model updates.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
