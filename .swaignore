@@ -1,9 +1,6 @@
 # Node modules - not needed for static site deployment
 node_modules
 
-# Source files (built versions are in dist/)
-Content
-
 # Build configuration files
 .github
 scripts
