@@ -23,7 +23,8 @@
     "lint:css:fix": "stylelint \"Content/stylesheets/**/*.css\" --fix",
     "lint:js:fix": "eslint \"Content/javascript/**/*.js\" --fix",
     "serve": "http-server . -p 8080 -o",
-    "update:github": "node scripts/update-github-contributions.js"
+    "update:github": "node scripts/update-github-contributions.js",
+    "test": "node scripts/smoke-test.js"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",

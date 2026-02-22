@@ -104,6 +104,61 @@ async function generateCriticalCSS() {
         
         console.log('   Fixed relative paths for fonts and images');
         
+        // Deduplicate @font-face and CSS rules across multiple inline <style> blocks
+        const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+        const styleMatches = [...html.matchAll(styleRegex)];
+        
+        if (styleMatches.length > 1) {
+            // Extract all CSS content from inline style blocks
+            let allCss = styleMatches.map(m => m[1]).join('\n');
+            
+            // Extract and deduplicate @font-face blocks
+            const fontFaceRegex = /@font-face\s*\{[^}]*\}/g;
+            const fontFaceBlocks = allCss.match(fontFaceRegex) || [];
+            const seenFontFaces = new Set();
+            const uniqueFontFaces = [];
+            for (const block of fontFaceBlocks) {
+                const normalized = block.replace(/\s+/g, ' ').trim();
+                if (!seenFontFaces.has(normalized)) {
+                    seenFontFaces.add(normalized);
+                    uniqueFontFaces.push(block);
+                }
+            }
+            const fontFaceDupes = fontFaceBlocks.length - uniqueFontFaces.length;
+            
+            // Remove all @font-face blocks from combined CSS
+            let remainingCss = allCss.replace(fontFaceRegex, '');
+            
+            // Deduplicate remaining CSS rule blocks
+            const ruleRegex = /([^{}]+\{[^}]*\})/g;
+            const ruleMatches = remainingCss.match(ruleRegex) || [];
+            const seenRules = new Set();
+            const uniqueRules = [];
+            for (const rule of ruleMatches) {
+                const normalized = rule.replace(/\s+/g, ' ').trim();
+                if (normalized && !seenRules.has(normalized)) {
+                    seenRules.add(normalized);
+                    uniqueRules.push(rule);
+                }
+            }
+            const ruleDupes = ruleMatches.length - uniqueRules.length;
+            
+            // Build merged, deduplicated style block
+            const mergedCss = [...uniqueFontFaces, ...uniqueRules].join('\n');
+            
+            // Remove all original <style> blocks and insert a single merged one
+            let firstReplaced = false;
+            html = html.replace(styleRegex, (match) => {
+                if (!firstReplaced) {
+                    firstReplaced = true;
+                    return `<style>${mergedCss}</style>`;
+                }
+                return '';
+            });
+            
+            console.log(`   🔄 Deduplicated CSS: merged ${styleMatches.length} <style> blocks into 1, removed ${fontFaceDupes} duplicate @font-face and ${ruleDupes} duplicate rule blocks`);
+        }
+        
         // Write the optimized HTML
         const outputPath = path.join(rootDir, 'index.critical.html');
         fs.writeFileSync(outputPath, html);

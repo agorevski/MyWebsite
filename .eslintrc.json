@@ -1,18 +1,13 @@
 {
   "env": {
     "browser": true,
-    "es2021": true,
-    "jquery": true
+    "es2021": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
     "ecmaVersion": "latest"
   },
   "ignorePatterns": ["*.min.js", "vendors/**"],
-  "globals": {
-    "ScrollReveal": "readonly",
-    "Materialize": "readonly"
-  },
   "rules": {
     "no-unused-vars": "warn",
     "no-undef": "warn",
